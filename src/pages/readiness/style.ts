@@ -11,6 +11,40 @@ export const S = {
     font-weight: 700;
     font-size: 40px;
     color: ${props => props.theme.mainColor};
-    margin: 150px 0;
+    margin: 150px 0 70px 0;
+  `,
+
+  SettingContainer: styled.div`
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 50px;
+  `,
+  InputContainer: styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  `,
+  Subject: styled.span`
+    font-size: 20px;
+  `,
+  NumberInput: styled.input`
+    width: 50px;
+    height: 30px;
+  `,
+  SelectContainer: styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    select {
+      text-align: center;
+      width: 60px;
+      height: 30px;
+    }
   `,
 };
