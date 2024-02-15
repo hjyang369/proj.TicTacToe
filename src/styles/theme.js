@@ -6,6 +6,7 @@ const theme = {
   deepGrey: "#222222",
   hoverGrey: "#DBDBDB",
   mainColor: "#ffaa40",
+  subMainColor: "#FEBA18",
   borderDiv: "1px solid lightgray",
 };
 

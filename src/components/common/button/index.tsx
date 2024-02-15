@@ -7,5 +7,9 @@ type buttonProps = {
 };
 export default function Button({ text, path }: buttonProps) {
   const { moveToPage } = useMove();
-  return <S.Button onClick={() => moveToPage(path)}>{text}</S.Button>;
+  return (
+    <S.Container>
+      <S.Button onClick={() => moveToPage(path)}>{text}</S.Button>
+    </S.Container>
+  );
 }

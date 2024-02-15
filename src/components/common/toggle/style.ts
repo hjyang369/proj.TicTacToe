@@ -7,10 +7,10 @@ export const S = {
 
   Button: styled.button`
     width: 200px;
-    border: 1px solid ${props => props.theme.mainColor};
-    background-color: ${props => props.theme.mainColor};
-    font-size: 23px;
-    box-shadow: 0px 5px 0px 0px #a66615;
+    border: 1px solid ${props => props.theme.subMainColor};
+    background-color: ${props => props.theme.subMainColor};
+    font-size: 15px;
+    box-shadow: 0px 5px 0px 0px #b1810d;
     display: block;
     position: relative;
     float: left;
@@ -24,7 +24,7 @@ export const S = {
     transition: all 0.2s;
     &:hover {
       color: #fff;
-      box-shadow: 0px 0px 0px 0px #a66615;
+      box-shadow: 0px 0px 0px 0px #b1810d;
       margin-top: 15px;
       margin-bottom: 5px;
     }
