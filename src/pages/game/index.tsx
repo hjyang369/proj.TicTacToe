@@ -1,14 +1,16 @@
 import { useAtom } from "jotai";
 import Board from "../../components/board";
 import Button from "../../components/common/button";
-import Toggle from "../../components/common/toggle";
 import { S } from "./style";
 import { settingAtom } from "../../store/atom";
+import Player from "./player";
 
 export default function Game() {
   const [setting, setSetting] = useAtom(settingAtom);
 
   console.log(setting);
+  const cancelNum = 3;
+
   return (
     <S.Container>
       <S.Title>현재 마크 놓을 플레이어 : 1</S.Title>
@@ -18,45 +20,21 @@ export default function Game() {
         </div>
         <S.Settings>
           <S.Players>
-            <S.Player>
-              <S.PlayerName>player 1</S.PlayerName>
-              <S.Plate>
-                <div>
-                  <span>마크 모양 : </span>
-                  <span>O</span>
-                </div>
-                <div>
-                  <span>마크 색깔 : </span>
-                  <span>◼︎</span>
-                </div>
-                <div>
-                  <span>남은 무르기 : </span>
-                  <span> 3회</span>
-                </div>
-              </S.Plate>
-              <Toggle text="player1 무르기" width="122.5px" />
-            </S.Player>
-            <S.Player>
-              <S.PlayerName>player 2</S.PlayerName>
-              <S.Plate>
-                <div>
-                  <span> 마크 모양 : </span>
-                  <span>X</span>
-                </div>
-                <div>
-                  <span> 마크 색깔 : </span>
-                  <span>◼︎</span>
-                </div>
-                <div>
-                  <span> 남은 무르기 : </span>
-                  <span> 3회</span>
-                </div>
-              </S.Plate>
-              <Toggle text="player2 무르기" width="122.5px" />
-            </S.Player>
+            <Player
+              playerName="player 1"
+              color={setting.player1Color}
+              pattern={setting.player1Pattern}
+              number={cancelNum}
+            />
+            <Player
+              playerName="player 2"
+              color={setting.player2Color}
+              pattern={setting.player2Pattern}
+              number={cancelNum}
+            />
           </S.Players>
 
-          <Button text="게임 다시 시작하기" path="/" width="282px" />
+          <Button text="게임 다시 시작하기" path="/" width="299px" />
           {/* <Button text="게임 저장하기" path="/result" width="282px" /> */}
         </S.Settings>
       </S.BoardContainer>
