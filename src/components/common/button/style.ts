@@ -5,8 +5,10 @@ export const S = {
     margin-left: 18px;
   `,
 
-  Button: styled.button`
-    width: 200px;
+  Button: styled.button<{
+    $width?: string;
+  }>`
+    width: ${props => (props.$width ? props.$width : "200px")};
     border: 1px solid ${props => props.theme.mainColor};
     background-color: ${props => props.theme.mainColor};
     font-size: 23px;

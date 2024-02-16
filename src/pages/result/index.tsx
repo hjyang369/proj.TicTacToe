@@ -11,7 +11,7 @@ export default function Result() {
         <Toggle text="2023년2월16일 00시00분" />
         <Board />
       </S.BoardContainer>
-      <Button text="게임 다시 시작하기" path="/game" />
+      <Button text="게임 다시 시작하기" path="/" />
     </S.Container>
   );
 }
