@@ -22,7 +22,7 @@ export const S = {
     gap: 20px;
     margin-bottom: 50px;
   `,
-  InputContainer: styled.div`
+  Space: styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -36,15 +36,14 @@ export const S = {
     width: 50px;
     height: 30px;
   `,
-  SelectContainer: styled.div`
+  Selects: styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    select {
-      text-align: center;
-      width: 60px;
-      height: 30px;
-    }
+  `,
+  Caution: styled.span`
+    font-size: 13.8px;
+    color: #ff1516;
   `,
 };
