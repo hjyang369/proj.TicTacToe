@@ -4,7 +4,7 @@ const theme = {
   lightGrey: "#B0B0B0",
   middleGrey: "#717171",
   deepGrey: "#222222",
-  hoverGrey: "#DBDBDB",
+  red: "#ff1516",
   mainColor: "#ffaa40",
   subMainColor: "#FEBA18",
   borderDiv: "1px solid lightgray",

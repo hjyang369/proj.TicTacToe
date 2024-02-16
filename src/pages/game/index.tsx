@@ -1,9 +1,14 @@
+import { useAtom } from "jotai";
 import Board from "../../components/board";
 import Button from "../../components/common/button";
 import Toggle from "../../components/common/toggle";
 import { S } from "./style";
+import { settingAtom } from "../../store/atom";
 
 export default function Game() {
+  const [setting, setSetting] = useAtom(settingAtom);
+
+  console.log(setting);
   return (
     <S.Container>
       <S.Title>현재 마크 놓을 플레이어 : 1</S.Title>
@@ -52,7 +57,7 @@ export default function Game() {
           </S.Players>
 
           <Button text="게임 다시 시작하기" path="/" width="282px" />
-          {/* <Button text="게임 저장하기" path="/result" /> */}
+          {/* <Button text="게임 저장하기" path="/result" width="282px" /> */}
         </S.Settings>
       </S.BoardContainer>
     </S.Container>
