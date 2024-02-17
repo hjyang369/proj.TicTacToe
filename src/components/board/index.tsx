@@ -1,25 +1,28 @@
 import Square from "../square";
 import { S } from "./style";
 
-type boardProps = {};
+type boardProps = {
+  squares: string | string[];
+  handlePlay: (i: number) => void;
+};
 
-export default function Board() {
+export default function Board({ squares, handlePlay }: boardProps) {
   return (
     <>
       <S.Row>
-        <Square value={0} />
-        <Square value={1} />
-        <Square value={2} />
+        <Square value={squares[0]} handleClick={() => handlePlay(0)} />
+        <Square value={squares[1]} handleClick={() => handlePlay(1)} />
+        <Square value={squares[2]} handleClick={() => handlePlay(2)} />
       </S.Row>
       <S.Row>
-        <Square value={3} />
-        <Square value={4} />
-        <Square value={5} />
+        <Square value={squares[3]} handleClick={() => handlePlay(3)} />
+        <Square value={squares[4]} handleClick={() => handlePlay(4)} />
+        <Square value={squares[5]} handleClick={() => handlePlay(5)} />
       </S.Row>
       <S.Row>
-        <Square value={6} />
-        <Square value={7} />
-        <Square value={8} />
+        <Square value={squares[6]} handleClick={() => handlePlay(6)} />
+        <Square value={squares[7]} handleClick={() => handlePlay(7)} />
+        <Square value={squares[8]} handleClick={() => handlePlay(8)} />
       </S.Row>
     </>
   );

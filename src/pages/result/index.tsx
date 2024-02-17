@@ -9,7 +9,7 @@ export default function Result() {
       <S.Title>게임 결과</S.Title>
       <S.BoardContainer>
         <Toggle text="2023년2월16일 00시00분" />
-        <Board />
+        <Board squares={[]} handlePlay={null} />
       </S.BoardContainer>
       <Button text="게임 다시 시작하기" path="/" />
     </S.Container>
