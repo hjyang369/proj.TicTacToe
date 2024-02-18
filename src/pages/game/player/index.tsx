@@ -6,6 +6,7 @@ type playerProps = {
   color: string;
   pattern: string;
   number: number;
+  minusMove: (player: string, time: number) => void;
 };
 
 export default function Player({
@@ -13,7 +14,8 @@ export default function Player({
   color,
   pattern,
   number,
-}: playerProps) {
+  minusMove,
+}: playerProps): JSX.Element {
   const plateOption = [
     { text: "마크 모양 : ", id: 1, mark: pattern },
     { text: "마크 색깔 : ", id: 2, mark: color },
@@ -33,7 +35,11 @@ export default function Player({
           );
         })}
       </S.Plate>
-      <Toggle text={`${playerName} 무르기`} width="130px" />
+      <Toggle
+        text={`${playerName} 무르기`}
+        width="130px"
+        onclick={() => minusMove(playerName, number)}
+      />
     </S.Container>
   );
 }

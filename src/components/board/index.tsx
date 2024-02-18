@@ -2,11 +2,14 @@ import Square from "../square";
 import { S } from "./style";
 
 type boardProps = {
-  squares: string | string[];
+  squares: Array<string>;
   handlePlay: (i: number) => void;
 };
 
-export default function Board({ squares, handlePlay }: boardProps) {
+export default function Board({
+  squares,
+  handlePlay,
+}: boardProps): JSX.Element {
   return (
     <>
       <S.Row>

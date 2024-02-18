@@ -14,7 +14,7 @@ export default function Select({
   value,
   handleInput,
   options,
-}: selectProps) {
+}: selectProps): JSX.Element {
   return (
     <S.Container>
       {title && <span>{title}</span>}

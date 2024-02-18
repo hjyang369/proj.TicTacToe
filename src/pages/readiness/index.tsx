@@ -7,7 +7,7 @@ import { settingAtom } from "../../store/atom";
 import { useNavigate } from "react-router";
 import Select from "../../components/common/select";
 
-export default function Readiness() {
+export default function Readiness(): JSX.Element {
   const { inputValue, handleInput } = useInputValue(initValue);
   const setSetting = useSetAtom(settingAtom);
   const navigate = useNavigate();

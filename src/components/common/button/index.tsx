@@ -7,7 +7,12 @@ type buttonProps = {
   path?: string;
   startGame?: () => void;
 };
-export default function Button({ text, width, path, startGame }: buttonProps) {
+export default function Button({
+  text,
+  width,
+  path,
+  startGame,
+}: buttonProps): JSX.Element {
   const navigate = useNavigate();
 
   const moveToPage = (path: string) => {

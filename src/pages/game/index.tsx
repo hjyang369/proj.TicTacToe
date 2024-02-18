@@ -7,12 +7,19 @@ import Player from "./player";
 import { useState } from "react";
 import { calculateWinner } from "../../modules/fuction";
 
-export default function Game() {
+export default function Game(): JSX.Element {
   const setting = useAtomValue(settingAtom);
   const [history, setHistory] = useState([Array(9).fill("")]);
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
   const xIsNext = currentMove % 2 === 0;
+  const [remainingTime, setRemainingTime] = useState({
+    player1: 3,
+    player2: 3,
+  });
+
+  console.log(currentSquares);
+  console.log(new Array(9));
 
   const handleHistory = nextSquares => {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -32,7 +39,6 @@ export default function Game() {
     }
     handleHistory(nextSquares);
   };
-  const cancelNum = 3;
 
   const winner = calculateWinner(currentSquares);
   let status;
@@ -41,6 +47,19 @@ export default function Game() {
   } else {
     status = "현재 마크 놓을 플레이어 : " + (xIsNext ? "X" : "O");
   }
+  const minusMove = (player, time) => {
+    if (currentMove === 0) {
+      return alert("게임 시작 전입니다. 게임 시작 후 무르기를 해주세요.");
+    }
+    if (time === 0) {
+      return alert("무르기 횟수를 모두 사용하셨습니다.");
+    }
+    setCurrentMove(prev => prev - 1);
+    setRemainingTime(prevState => ({
+      ...prevState,
+      [player]: prevState[player] - 1,
+    }));
+  };
 
   return (
     <S.Container>
@@ -52,18 +71,21 @@ export default function Game() {
         <S.Settings>
           <S.Players>
             <Player
-              playerName="player 1"
+              playerName="player1"
               color={setting.player1Color}
               pattern={setting.player1Pattern}
-              number={cancelNum}
+              number={remainingTime.player1}
+              minusMove={minusMove}
             />
             <Player
-              playerName="player 2"
+              playerName="player2"
               color={setting.player2Color}
               pattern={setting.player2Pattern}
-              number={cancelNum}
+              number={remainingTime.player2}
+              minusMove={minusMove}
             />
           </S.Players>
+
           <Button text="게임 다시 시작하기" path="/" width="299px" />
           {/* <Button text="게임 저장하기" path="/result" width="282px" /> */}
         </S.Settings>

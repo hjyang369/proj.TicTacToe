@@ -3,7 +3,7 @@ import Button from "../../components/common/button";
 import Toggle from "../../components/common/toggle";
 import { S } from "./style";
 
-export default function Result() {
+export default function Result(): JSX.Element {
   return (
     <S.Container>
       <S.Title>게임 결과</S.Title>
