@@ -6,7 +6,7 @@ import Button from "../../components/common/button";
 import { playerOrderAtom, settingAtom } from "../../store/atom";
 import Player from "./player";
 import { useState } from "react";
-import { calculateWinner } from "../../modules/fuction";
+import { calculateWinner, currentTime } from "../../modules/fuction";
 
 export default function Game(): JSX.Element {
   const setting = useAtomValue(settingAtom);
@@ -75,6 +75,12 @@ export default function Game(): JSX.Element {
     }));
   };
 
+  const saveGame = () => {
+    const prev = JSON.parse(localStorage.getItem("history")) || [];
+    const newHistory = [...prev, { history: history, time: currentTime }];
+    localStorage.setItem("history", JSON.stringify(newHistory));
+  };
+
   return (
     <S.Container>
       <S.Title>{status}</S.Title>
@@ -100,7 +106,12 @@ export default function Game(): JSX.Element {
             />
           </S.Players>
           {isFinished ? (
-            <Button text="게임 저장하기" path="/result" width="282px" />
+            <Button
+              text="게임 저장하기"
+              saveGame={saveGame}
+              path="/result"
+              width="309px"
+            />
           ) : (
             <Button text="게임 다시 시작하기" path="/" width="309px" />
           )}

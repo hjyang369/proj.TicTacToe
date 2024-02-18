@@ -19,24 +19,21 @@ export default function Readiness(): JSX.Element {
   const { inputValue, handleInput } = useInputValue(initValue);
   const setSetting = useSetAtom(settingAtom);
   const setOrder = useSetAtom(playerOrderAtom);
-  const navigate = useNavigate();
   const winScore = inputValue.boardSize.slice(0, 1);
 
-  const startGame = (path: string) => {
+  const startGame = () => {
     const playerArr = startPlayerOption.slice(1, 3);
     if (inputValue.startPlayer === "random") {
       const isFirstPlayer = chooseRandomPlayer(playerArr);
       const secondPlayer = playerArr.filter(player => player !== isFirstPlayer);
       setSetting(inputValue);
       setOrder({ first: isFirstPlayer, second: secondPlayer[0] });
-      navigate(path);
     } else {
       const secondPlayer = playerArr.filter(
         player => player !== inputValue.startPlayer,
       );
       setSetting(inputValue);
       setOrder({ first: inputValue.startPlayer, second: secondPlayer[0] });
-      navigate(path);
     }
   };
 
@@ -109,7 +106,7 @@ export default function Readiness(): JSX.Element {
           </S.Caution>
         </S.Space>
       </S.SettingContainer>
-      <Button text="게임 시작" startGame={() => startGame("/game")} />
+      <Button text="게임 시작" startGame={startGame} path="/game" />
     </S.Container>
   );
 }
