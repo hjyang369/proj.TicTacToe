@@ -25,9 +25,6 @@ export default function Game(): JSX.Element {
   const isFull = currentSquares.filter(mark => mark === "").length === 0;
   const isFinished = !!winner || (isFull && currentMove > 0);
 
-  console.log(">>", isFinished);
-  console.log(currentSquares);
-
   const handleHistory = nextSquares => {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
@@ -77,7 +74,15 @@ export default function Game(): JSX.Element {
 
   const saveGame = () => {
     const prev = JSON.parse(localStorage.getItem("history")) || [];
-    const newHistory = [...prev, { history: history, time: currentTime }];
+    const newHistory = [
+      ...prev,
+      {
+        id: new Date(),
+        history: history,
+        time: currentTime,
+        boardSize: boardSize,
+      },
+    ];
     localStorage.setItem("history", JSON.stringify(newHistory));
   };
 
