@@ -4,29 +4,34 @@ import { S } from "./style";
 type boardProps = {
   squares: Array<string>;
   handlePlay: (i: number) => void;
+  boardSize?: number;
 };
 
 export default function Board({
   squares,
   handlePlay,
+  boardSize,
 }: boardProps): JSX.Element {
+  const row = Array.from({ length: boardSize }, (_, index) => index);
+
   return (
     <>
-      <S.Row>
-        <Square value={squares[0]} handleClick={() => handlePlay(0)} />
-        <Square value={squares[1]} handleClick={() => handlePlay(1)} />
-        <Square value={squares[2]} handleClick={() => handlePlay(2)} />
-      </S.Row>
-      <S.Row>
-        <Square value={squares[3]} handleClick={() => handlePlay(3)} />
-        <Square value={squares[4]} handleClick={() => handlePlay(4)} />
-        <Square value={squares[5]} handleClick={() => handlePlay(5)} />
-      </S.Row>
-      <S.Row>
-        <Square value={squares[6]} handleClick={() => handlePlay(6)} />
-        <Square value={squares[7]} handleClick={() => handlePlay(7)} />
-        <Square value={squares[8]} handleClick={() => handlePlay(8)} />
-      </S.Row>
+      {row.map((ele, i) => {
+        return (
+          <S.Row key={ele}>
+            {row.map((ele, j) => {
+              const index = i * boardSize + j;
+              return (
+                <Square
+                  key={index}
+                  value={squares[index]}
+                  handleClick={() => handlePlay(index)}
+                />
+              );
+            })}
+          </S.Row>
+        );
+      })}
     </>
   );
 }

@@ -10,8 +10,10 @@ import { calculateWinner } from "../../modules/fuction";
 
 export default function Game(): JSX.Element {
   const setting = useAtomValue(settingAtom);
+  const boardSize = Number(setting.boardSize.slice(0, 1));
+  const rowOfRows = boardSize * boardSize;
   const playerOrder = useAtomValue(playerOrderAtom);
-  const [history, setHistory] = useState([Array(9).fill("")]);
+  const [history, setHistory] = useState([Array(rowOfRows).fill("")]);
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
   const xIsNext = currentMove % 2 === 0;
@@ -19,7 +21,7 @@ export default function Game(): JSX.Element {
     player1: 3,
     player2: 3,
   });
-  const winner = calculateWinner(currentSquares);
+  const winner = calculateWinner(currentSquares, boardSize);
   const isFull = currentSquares.filter(mark => mark === "").length === 0;
   const isFinished = !!winner || (isFull && currentMove > 0);
 
@@ -33,7 +35,7 @@ export default function Game(): JSX.Element {
   };
 
   const handlePlay = (i: number) => {
-    if (currentSquares[i] || calculateWinner(currentSquares)) {
+    if (currentSquares[i] || calculateWinner(currentSquares, boardSize)) {
       return;
     }
     const nextSquares = currentSquares.slice();
@@ -78,7 +80,11 @@ export default function Game(): JSX.Element {
       <S.Title>{status}</S.Title>
       <S.BoardContainer>
         <div>
-          <Board squares={currentSquares} handlePlay={handlePlay} />
+          <Board
+            squares={currentSquares}
+            handlePlay={handlePlay}
+            boardSize={boardSize}
+          />
         </div>
         <S.Settings>
           <S.Players>
