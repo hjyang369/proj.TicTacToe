@@ -17,3 +17,8 @@ export const calculateWinner = (squares: Array<string>) => {
   }
   return null;
 };
+
+export const chooseRandomPlayer = players => {
+  const randomIndex = Math.floor(Math.random() * players.length);
+  return players[randomIndex];
+};

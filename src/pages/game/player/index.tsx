@@ -1,24 +1,23 @@
+import { useAtomValue } from "jotai";
 import Toggle from "../../../components/common/toggle";
 import { S } from "./style";
+import { settingAtom } from "../../../store/atom";
 
 type playerProps = {
   playerName: string;
-  color: string;
-  pattern: string;
   number: number;
   minusMove: (player: string, time: number) => void;
 };
 
 export default function Player({
   playerName,
-  color,
-  pattern,
   number,
   minusMove,
 }: playerProps): JSX.Element {
+  const setting = useAtomValue(settingAtom);
   const plateOption = [
-    { text: "마크 모양 : ", id: 1, mark: pattern },
-    { text: "마크 색깔 : ", id: 2, mark: color },
+    { text: "마크 모양 : ", id: 1, mark: setting[`${playerName}Pattern`] },
+    { text: "마크 색깔 : ", id: 2, mark: setting[`${playerName}Color`] },
     { text: "남은 무르기 : ", id: 3, mark: `${number}회` },
   ];
 
@@ -30,7 +29,13 @@ export default function Player({
           return (
             <div key={option.id}>
               <span>{option.text}</span>
-              <span>{option.mark}</span>
+              {option.id === 3 ? (
+                <span>{option.mark}</span>
+              ) : (
+                <S.MarkColor $color={setting[`${playerName}Color`]}>
+                  {option.mark}
+                </S.MarkColor>
+              )}
             </div>
           );
         })}

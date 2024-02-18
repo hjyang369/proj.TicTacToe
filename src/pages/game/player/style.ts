@@ -21,4 +21,10 @@ export const S = {
     gap: 5px;
     width: 130px;
   `,
+
+  MarkColor: styled.span<{
+    $color?: string;
+  }>`
+    color: ${props => (props.$color ? props.$color : "#ggg")};
+  `,
 };

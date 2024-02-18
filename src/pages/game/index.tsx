@@ -19,7 +19,7 @@ export default function Game(): JSX.Element {
   });
 
   console.log(currentSquares);
-  console.log(new Array(9));
+  console.log(setting.startPlayer);
 
   const handleHistory = nextSquares => {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -72,15 +72,11 @@ export default function Game(): JSX.Element {
           <S.Players>
             <Player
               playerName="player1"
-              color={setting.player1Color}
-              pattern={setting.player1Pattern}
               number={remainingTime.player1}
               minusMove={minusMove}
             />
             <Player
               playerName="player2"
-              color={setting.player2Color}
-              pattern={setting.player2Pattern}
               number={remainingTime.player2}
               minusMove={minusMove}
             />

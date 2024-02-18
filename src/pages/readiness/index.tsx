@@ -6,6 +6,14 @@ import { useSetAtom } from "jotai";
 import { settingAtom } from "../../store/atom";
 import { useNavigate } from "react-router";
 import Select from "../../components/common/select";
+import {
+  boardSizeOption,
+  colorOption,
+  initValue,
+  shapeOption,
+  startPlayerOption,
+} from "../../modules/constants";
+import { chooseRandomPlayer } from "../../modules/fuction";
 
 export default function Readiness(): JSX.Element {
   const { inputValue, handleInput } = useInputValue(initValue);
@@ -14,8 +22,14 @@ export default function Readiness(): JSX.Element {
   const winScore = inputValue.boardSize.slice(0, 1);
 
   const startGame = (path: string) => {
-    setSetting(inputValue);
-    navigate(path);
+    if (inputValue.startPlayer === "random") {
+      const isFirstPlayer = chooseRandomPlayer(startPlayerOption.slice(1, 3));
+      setSetting({ ...inputValue, startPlayer: isFirstPlayer });
+      navigate(path);
+    } else {
+      setSetting(inputValue);
+      navigate(path);
+    }
   };
 
   return (
@@ -91,36 +105,3 @@ export default function Readiness(): JSX.Element {
     </S.Container>
   );
 }
-
-const initValue = {
-  boardSize: "3 X 3",
-  player1Color: "파랑색",
-  player2Color: "빨강색",
-  player1Pattern: "X",
-  player2Pattern: "O",
-  startPlayer: "random",
-};
-
-const boardSizeOption = [
-  "3 X 3",
-  "4 X 4",
-  "5 X 5",
-  "6 X 6",
-  "7 X 7",
-  "8 X 8",
-  "9 X 9",
-];
-
-const colorOption = [
-  "빨강색",
-  "주황색",
-  "노랑색",
-  "초록색",
-  "파랑색",
-  "남색",
-  "보라색",
-  "핑크색",
-];
-const shapeOption = ["X", "O", "♢", "♡", "♧", "♤", "▵", "◻︎"];
-
-const startPlayerOption = ["랜덤", "플레이어1", "플레이어2"];
