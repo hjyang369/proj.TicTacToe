@@ -24,9 +24,7 @@ export default function Game(): JSX.Element {
   const winner = calculateWinner(currentSquares, boardSize);
   const isFull = currentSquares.filter(mark => mark === "").length === 0;
   const isFinished = !!winner || (isFull && currentMove > 0);
-
-  console.log(">>", isFinished);
-  console.log(currentSquares);
+  const [moveNum, setMoveNum] = useState(Array(rowOfRows).fill(undefined));
 
   const handleHistory = nextSquares => {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -39,12 +37,15 @@ export default function Game(): JSX.Element {
       return;
     }
     const nextSquares = currentSquares.slice();
+    const moveSquares = moveNum.slice();
     if (xIsNext) {
       nextSquares[i] = setting[`${playerOrder.first}Pattern`];
     } else {
       nextSquares[i] = setting[`${playerOrder.second}Pattern`];
     }
+    moveSquares[i] = currentMove + 1;
     handleHistory(nextSquares);
+    setMoveNum(moveSquares);
   };
 
   let status;
@@ -77,7 +78,18 @@ export default function Game(): JSX.Element {
 
   const saveGame = () => {
     const prev = JSON.parse(localStorage.getItem("history")) || [];
-    const newHistory = [...prev, { history: history, time: currentTime }];
+    const newHistory = [
+      ...prev,
+      {
+        id: new Date(),
+        history: history,
+        time: currentTime,
+        boardSize: boardSize,
+        moveNum: moveNum,
+        setting: setting,
+        winner: status,
+      },
+    ];
     localStorage.setItem("history", JSON.stringify(newHistory));
   };
 

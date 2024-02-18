@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { inputValueData } from "../types/type";
+import { TStringObj } from "../types/type";
 
-const useInputValue = (initInput: inputValueData) => {
-  const [inputValue, setInputValue] = useState<inputValueData>(initInput);
+const useInputValue = (initInput: TStringObj) => {
+  const [inputValue, setInputValue] = useState<TStringObj>(initInput);
 
   const handleInput = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const { name, value } = e.target;

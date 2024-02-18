@@ -1,16 +1,43 @@
-import Board from "../../components/board";
+import { useState } from "react";
+import Board from "./board/index";
 import Button from "../../components/common/button";
 import Toggle from "../../components/common/toggle";
 import { S } from "./style";
+import { TBooleanObj } from "../../types/type";
 
 export default function Result(): JSX.Element {
+  const [toggle, setToggle] = useState<TBooleanObj>({});
+  const history = JSON.parse(localStorage.getItem("history")) || [];
+  const handleToggle = (id: string) => {
+    setToggle(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
   return (
     <S.Container>
       <S.Title>게임 결과</S.Title>
-      <S.BoardContainer>
-        <Toggle text="2023년2월16일 00시00분" />
-        <Board squares={[]} handlePlay={null} />
-      </S.BoardContainer>
+      <S.Result>
+        {history.map(content => {
+          return (
+            <S.BoardContainer key={content.id}>
+              <Toggle
+                text={content.time}
+                onclick={() => handleToggle(content.id)}
+              />
+              {toggle[content.id] && (
+                <div>
+                  <S.Winner>{content.winner}</S.Winner>
+                  <Board
+                    squares={content.history}
+                    boardSize={content.boardSize}
+                    setting={content.setting}
+                    moveNum={content.moveNum}
+                  />
+                </div>
+              )}
+            </S.BoardContainer>
+          );
+        })}
+      </S.Result>
       <Button text="게임 다시 시작하기" path="/" />
     </S.Container>
   );
