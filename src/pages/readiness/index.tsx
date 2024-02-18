@@ -3,19 +3,38 @@ import { S } from "./style";
 import Button from "../../components/common/button";
 import useInputValue from "../../hooks/useInputValue";
 import { useSetAtom } from "jotai";
-import { settingAtom } from "../../store/atom";
+import { playerOrderAtom, settingAtom } from "../../store/atom";
 import { useNavigate } from "react-router";
 import Select from "../../components/common/select";
+import {
+  boardSizeOption,
+  colorOption,
+  initValue,
+  shapeOption,
+  startPlayerOption,
+} from "../../modules/constants";
+import { chooseRandomPlayer } from "../../modules/fuction";
 
-export default function Readiness() {
+export default function Readiness(): JSX.Element {
   const { inputValue, handleInput } = useInputValue(initValue);
   const setSetting = useSetAtom(settingAtom);
-  const navigate = useNavigate();
+  const setOrder = useSetAtom(playerOrderAtom);
   const winScore = inputValue.boardSize.slice(0, 1);
 
-  const startGame = (path: string) => {
-    setSetting(inputValue);
-    navigate(path);
+  const startGame = () => {
+    const playerArr = startPlayerOption.slice(1, 3);
+    if (inputValue.startPlayer === "random") {
+      const isFirstPlayer = chooseRandomPlayer(playerArr);
+      const secondPlayer = playerArr.filter(player => player !== isFirstPlayer);
+      setSetting(inputValue);
+      setOrder({ first: isFirstPlayer, second: secondPlayer[0] });
+    } else {
+      const secondPlayer = playerArr.filter(
+        player => player !== inputValue.startPlayer,
+      );
+      setSetting(inputValue);
+      setOrder({ first: inputValue.startPlayer, second: secondPlayer[0] });
+    }
   };
 
   return (
@@ -87,40 +106,7 @@ export default function Readiness() {
           </S.Caution>
         </S.Space>
       </S.SettingContainer>
-      <Button text="게임 시작" startGame={() => startGame("/game")} />
+      <Button text="게임 시작" startGame={startGame} path="/game" />
     </S.Container>
   );
 }
-
-const initValue = {
-  boardSize: "3 X 3",
-  player1Color: "파랑색",
-  player2Color: "빨강색",
-  player1Pattern: "X",
-  player2Pattern: "O",
-  startPlayer: "random",
-};
-
-const boardSizeOption = [
-  "3 X 3",
-  "4 X 4",
-  "5 X 5",
-  "6 X 6",
-  "7 X 7",
-  "8 X 8",
-  "9 X 9",
-];
-
-const colorOption = [
-  "빨강색",
-  "주황색",
-  "노랑색",
-  "초록색",
-  "파랑색",
-  "남색",
-  "보라색",
-  "핑크색",
-];
-const shapeOption = ["X", "O", "♢", "♡", "♧", "♤", "▵", "◻︎"];
-
-const startPlayerOption = ["랜덤", "플레이어1", "플레이어2"];

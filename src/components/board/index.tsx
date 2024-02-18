@@ -1,26 +1,37 @@
 import Square from "../square";
 import { S } from "./style";
 
-type boardProps = {};
+type boardProps = {
+  squares: Array<string>;
+  handlePlay: (i: number) => void;
+  boardSize?: number;
+};
 
-export default function Board() {
+export default function Board({
+  squares,
+  handlePlay,
+  boardSize,
+}: boardProps): JSX.Element {
+  const row = Array.from({ length: boardSize }, (_, index) => index);
+
   return (
     <>
-      <S.Row>
-        <Square value={0} />
-        <Square value={1} />
-        <Square value={2} />
-      </S.Row>
-      <S.Row>
-        <Square value={3} />
-        <Square value={4} />
-        <Square value={5} />
-      </S.Row>
-      <S.Row>
-        <Square value={6} />
-        <Square value={7} />
-        <Square value={8} />
-      </S.Row>
+      {row.map((ele, i) => {
+        return (
+          <S.Row key={ele}>
+            {row.map((ele, j) => {
+              const index = i * boardSize + j;
+              return (
+                <Square
+                  key={index}
+                  value={squares[index]}
+                  handleClick={() => handlePlay(index)}
+                />
+              );
+            })}
+          </S.Row>
+        );
+      })}
     </>
   );
 }

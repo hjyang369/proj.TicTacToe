@@ -4,10 +4,17 @@ import { S } from "./style";
 type buttonProps = {
   text: string;
   width?: string;
-  path?: string;
+  path: string;
   startGame?: () => void;
+  saveGame?: () => void;
 };
-export default function Button({ text, width, path, startGame }: buttonProps) {
+export default function Button({
+  text,
+  width,
+  path,
+  startGame,
+  saveGame,
+}: buttonProps): JSX.Element {
   const navigate = useNavigate();
 
   const moveToPage = (path: string) => {
@@ -15,11 +22,12 @@ export default function Button({ text, width, path, startGame }: buttonProps) {
   };
 
   const onclick = () => {
-    if (path) {
-      moveToPage(path);
-    } else {
-      startGame && startGame();
+    if (startGame) {
+      startGame();
+    } else if (saveGame) {
+      saveGame();
     }
+    moveToPage(path);
   };
 
   return (

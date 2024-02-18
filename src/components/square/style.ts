@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
 
 export const S = {
-  Square: styled.button`
+  Square: styled.button<{
+    $color?: string;
+  }>`
     background: #fff;
     border: 1px solid #999;
     float: left;
@@ -14,5 +16,6 @@ export const S = {
     text-align: center;
     width: 50px;
     height: 50px;
+    color: ${props => (props.$color ? props.$color : "#fff")};
   `,
 };

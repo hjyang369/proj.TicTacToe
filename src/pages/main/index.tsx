@@ -1,7 +1,7 @@
 import { S } from "./style";
 import Button from "../../components/common/button";
 
-export default function Main() {
+export default function Main(): JSX.Element {
   return (
     <S.Container>
       <S.Title>Tic Tac Toe</S.Title>

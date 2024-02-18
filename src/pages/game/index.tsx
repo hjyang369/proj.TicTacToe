@@ -1,63 +1,120 @@
-import { useAtom } from "jotai";
+import { S } from "./style";
+//
+import { useAtomValue } from "jotai";
 import Board from "../../components/board";
 import Button from "../../components/common/button";
-import Toggle from "../../components/common/toggle";
-import { S } from "./style";
-import { settingAtom } from "../../store/atom";
+import { playerOrderAtom, settingAtom } from "../../store/atom";
+import Player from "./player";
+import { useState } from "react";
+import { calculateWinner, currentTime } from "../../modules/fuction";
 
-export default function Game() {
-  const [setting, setSetting] = useAtom(settingAtom);
+export default function Game(): JSX.Element {
+  const setting = useAtomValue(settingAtom);
+  const boardSize = Number(setting.boardSize.slice(0, 1));
+  const rowOfRows = boardSize * boardSize;
+  const playerOrder = useAtomValue(playerOrderAtom);
+  const [history, setHistory] = useState([Array(rowOfRows).fill("")]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const currentSquares = history[currentMove];
+  const xIsNext = currentMove % 2 === 0;
+  const [remainingTime, setRemainingTime] = useState({
+    player1: 3,
+    player2: 3,
+  });
+  const winner = calculateWinner(currentSquares, boardSize);
+  const isFull = currentSquares.filter(mark => mark === "").length === 0;
+  const isFinished = !!winner || (isFull && currentMove > 0);
 
-  console.log(setting);
+  console.log(">>", isFinished);
+  console.log(currentSquares);
+
+  const handleHistory = nextSquares => {
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+  };
+
+  const handlePlay = (i: number) => {
+    if (currentSquares[i] || calculateWinner(currentSquares, boardSize)) {
+      return;
+    }
+    const nextSquares = currentSquares.slice();
+    if (xIsNext) {
+      nextSquares[i] = setting[`${playerOrder.first}Pattern`];
+    } else {
+      nextSquares[i] = setting[`${playerOrder.second}Pattern`];
+    }
+    handleHistory(nextSquares);
+  };
+
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else if (isFull && currentMove > 0) {
+    status = "무승부";
+  } else {
+    status =
+      "현재 마크 놓을 플레이어 : " +
+      (xIsNext ? playerOrder.first : playerOrder.second);
+  }
+
+  const minusMove = (player, time) => {
+    if (currentMove === 0) {
+      return alert("게임 시작 전입니다. 게임 시작 후 무르기를 해주세요.");
+    }
+    if (time === 0) {
+      return alert("무르기 횟수를 모두 사용하셨습니다.");
+    }
+    if (winner) {
+      return alert("이미 게임이 끝나서 무르기를 할 수 없습니다.");
+    }
+    setCurrentMove(prev => prev - 1);
+    setRemainingTime(prevState => ({
+      ...prevState,
+      [player]: prevState[player] - 1,
+    }));
+  };
+
+  const saveGame = () => {
+    const prev = JSON.parse(localStorage.getItem("history")) || [];
+    const newHistory = [...prev, { history: history, time: currentTime }];
+    localStorage.setItem("history", JSON.stringify(newHistory));
+  };
+
   return (
     <S.Container>
-      <S.Title>현재 마크 놓을 플레이어 : 1</S.Title>
+      <S.Title>{status}</S.Title>
       <S.BoardContainer>
         <div>
-          <Board />
+          <Board
+            squares={currentSquares}
+            handlePlay={handlePlay}
+            boardSize={boardSize}
+          />
         </div>
         <S.Settings>
           <S.Players>
-            <S.Player>
-              <S.PlayerName>player 1</S.PlayerName>
-              <S.Plate>
-                <div>
-                  <span>마크 모양 : </span>
-                  <span>O</span>
-                </div>
-                <div>
-                  <span>마크 색깔 : </span>
-                  <span>◼︎</span>
-                </div>
-                <div>
-                  <span>남은 무르기 : </span>
-                  <span> 3회</span>
-                </div>
-              </S.Plate>
-              <Toggle text="player1 무르기" width="122.5px" />
-            </S.Player>
-            <S.Player>
-              <S.PlayerName>player 2</S.PlayerName>
-              <S.Plate>
-                <div>
-                  <span> 마크 모양 : </span>
-                  <span>X</span>
-                </div>
-                <div>
-                  <span> 마크 색깔 : </span>
-                  <span>◼︎</span>
-                </div>
-                <div>
-                  <span> 남은 무르기 : </span>
-                  <span> 3회</span>
-                </div>
-              </S.Plate>
-              <Toggle text="player2 무르기" width="122.5px" />
-            </S.Player>
+            <Player
+              playerName="player1"
+              number={remainingTime.player1}
+              minusMove={minusMove}
+            />
+            <Player
+              playerName="player2"
+              number={remainingTime.player2}
+              minusMove={minusMove}
+            />
           </S.Players>
-
-          <Button text="게임 다시 시작하기" path="/" width="282px" />
-          {/* <Button text="게임 저장하기" path="/result" width="282px" /> */}
+          {isFinished ? (
+            <Button
+              text="게임 저장하기"
+              saveGame={saveGame}
+              path="/result"
+              width="309px"
+            />
+          ) : (
+            <Button text="게임 다시 시작하기" path="/" width="309px" />
+          )}
         </S.Settings>
       </S.BoardContainer>
     </S.Container>
