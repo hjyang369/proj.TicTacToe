@@ -25,8 +25,12 @@ export const startPlayerOption = ["random", "player1", "player2"];
 export const initValue = {
   boardSize: "3 X 3",
   player1Color: "blue",
-  player2Color: "red",
   player1Pattern: "X",
+  player2Color: "red",
   player2Pattern: "O",
   startPlayer: "random",
+};
+export const whoIsStartPlayer = {
+  first: "",
+  second: "",
 };

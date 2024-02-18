@@ -19,12 +19,12 @@ export const S = {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 130px;
+    width: 135px;
   `,
 
   MarkColor: styled.span<{
     $color?: string;
   }>`
-    color: ${props => (props.$color ? props.$color : "#ggg")};
+    color: ${props => (props.$color ? props.$color : "#fff")};
   `,
 };

@@ -42,7 +42,7 @@ export default function Player({
       </S.Plate>
       <Toggle
         text={`${playerName} 무르기`}
-        width="130px"
+        width="135px"
         onclick={() => minusMove(playerName, number)}
       />
     </S.Container>

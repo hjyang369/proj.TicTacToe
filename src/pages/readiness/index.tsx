@@ -3,7 +3,7 @@ import { S } from "./style";
 import Button from "../../components/common/button";
 import useInputValue from "../../hooks/useInputValue";
 import { useSetAtom } from "jotai";
-import { settingAtom } from "../../store/atom";
+import { playerOrderAtom, settingAtom } from "../../store/atom";
 import { useNavigate } from "react-router";
 import Select from "../../components/common/select";
 import {
@@ -18,16 +18,24 @@ import { chooseRandomPlayer } from "../../modules/fuction";
 export default function Readiness(): JSX.Element {
   const { inputValue, handleInput } = useInputValue(initValue);
   const setSetting = useSetAtom(settingAtom);
+  const setOrder = useSetAtom(playerOrderAtom);
   const navigate = useNavigate();
   const winScore = inputValue.boardSize.slice(0, 1);
 
   const startGame = (path: string) => {
+    const playerArr = startPlayerOption.slice(1, 3);
     if (inputValue.startPlayer === "random") {
-      const isFirstPlayer = chooseRandomPlayer(startPlayerOption.slice(1, 3));
-      setSetting({ ...inputValue, startPlayer: isFirstPlayer });
+      const isFirstPlayer = chooseRandomPlayer(playerArr);
+      const secondPlayer = playerArr.filter(player => player !== isFirstPlayer);
+      setSetting(inputValue);
+      setOrder({ first: isFirstPlayer, second: secondPlayer[0] });
       navigate(path);
     } else {
+      const secondPlayer = playerArr.filter(
+        player => player !== inputValue.startPlayer,
+      );
       setSetting(inputValue);
+      setOrder({ first: inputValue.startPlayer, second: secondPlayer[0] });
       navigate(path);
     }
   };
