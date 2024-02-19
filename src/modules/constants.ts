@@ -10,26 +10,37 @@ export const options = {
     "9 X 9",
   ],
   colorOption: [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "navy",
-    "purple",
-    "pink",
+    "빨강색",
+    "주황색",
+    "노랑색",
+    "초록색",
+    "파랑색",
+    "남색",
+    "보라색",
+    "핑크색",
   ],
   shapeOption: ["X", "O", "♢", "♡", "♧", "♤", "▵", "◻︎"],
 
   startPlayerOption: ["random", "player1", "player2"],
 };
 
+export const colorChip = {
+  빨강색: "#D32117",
+  주황색: "#FF6A14",
+  노랑색: "#FFBC1A",
+  초록색: "#008000",
+  파랑색: "#0000ff",
+  남색: "#072956",
+  보라색: "#800080",
+  핑크색: "#E71682",
+};
+
 export const initValue = {
   boardSize: "3 X 3",
   winCondition: 3,
-  player1Color: "blue",
+  player1Color: "파랑색",
   player1Pattern: "X",
-  player2Color: "red",
+  player2Color: "빨강색",
   player2Pattern: "O",
   startPlayer: "random",
 };

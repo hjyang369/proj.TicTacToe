@@ -1,6 +1,7 @@
 // css, 컴포넌트, 상수, 타입
 import { S } from "./style";
 import Toggle from "../../../components/common/toggle";
+import { colorChip } from "../../../modules/constants";
 //
 import { useAtomValue } from "jotai";
 import { settingAtom } from "../../../store/atom";
@@ -34,7 +35,7 @@ export default function Player({
               {option.id === 3 ? (
                 <span>{option.mark}</span>
               ) : (
-                <S.MarkColor $color={setting[`${playerName}Color`]}>
+                <S.MarkColor $color={colorChip[setting[`${playerName}Color`]]}>
                   {option.mark}
                 </S.MarkColor>
               )}

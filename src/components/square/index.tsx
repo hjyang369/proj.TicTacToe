@@ -3,6 +3,7 @@ import { S } from "./style";
 //
 import { useAtomValue } from "jotai";
 import { settingAtom } from "../../store/atom";
+import { colorChip } from "../../modules/constants";
 
 type squareProps = {
   value: string;
@@ -17,9 +18,9 @@ export default function Square({
 
   let color;
   if (value === setting.player1Pattern) {
-    color = setting.player1Color;
+    color = colorChip[setting.player1Color];
   } else if (value === setting.player2Pattern) {
-    color = setting.player2Color;
+    color = colorChip[setting.player2Color];
   }
 
   return (
