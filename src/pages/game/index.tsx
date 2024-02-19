@@ -13,27 +13,30 @@ import { calculateWinner, currentTime } from "../../modules/function";
 
 export default function Game(): JSX.Element {
   const setting = useAtomValue(settingAtom);
-  const boardSize = Number(setting.boardSize.slice(0, 1));
-  const rowOfRows = boardSize * boardSize;
+  const boardSize: number = Number(setting.boardSize.slice(0, 1));
+  const rowOfRows: number = boardSize * boardSize;
   const playerOrder = useAtomValue(playerOrderAtom);
   const [history, setHistory] = useState<string[][]>([
     Array(rowOfRows).fill(""),
   ]);
   const [currentMove, setCurrentMove] = useState(0);
-  const currentSquares = history[currentMove];
-  const xIsNext = currentMove % 2 === 0;
+  const currentSquares: string[] = history[currentMove];
+  const xIsNext: boolean = currentMove % 2 === 0;
   const [remainingTime, setRemainingTime] = useState<TNumberObj>({
     player1: 3,
     player2: 3,
   });
-  const winner = calculateWinner(
+  const winner: string | null = calculateWinner(
     currentSquares,
     boardSize,
     setting.winCondition,
   );
-  const isFull = currentSquares.filter(mark => mark === "").length === 0;
-  const isFinished = !!winner || (isFull && currentMove > 0);
-  const [moveNum, setMoveNum] = useState(Array(rowOfRows).fill(undefined));
+  const isFull: boolean =
+    currentSquares.filter(mark => mark === "").length === 0;
+  const isFinished: boolean = !!winner || (isFull && currentMove > 0);
+  const [moveNum, setMoveNum] = useState<number[]>(
+    Array(rowOfRows).fill(undefined),
+  );
   const { beforeStartAlert, runOutAlert, finishedAlert } = alertMessage;
 
   const handleHistory = (nextSquares: string[]) => {

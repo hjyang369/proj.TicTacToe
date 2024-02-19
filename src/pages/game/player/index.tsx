@@ -2,6 +2,7 @@
 import { S } from "./style";
 import Toggle from "../../../components/common/toggle";
 import { colorChip } from "../../../modules/constants";
+import { TPlateOption } from "../../../types/type";
 //
 import { useAtomValue } from "jotai";
 import { settingAtom } from "../../../store/atom";
@@ -19,9 +20,17 @@ export default function Player({
 }: playerProps): JSX.Element {
   const setting = useAtomValue(settingAtom);
 
-  const plateOption = [
-    { text: "마크 모양 : ", id: 1, mark: setting[`${playerName}Pattern`] },
-    { text: "마크 색깔 : ", id: 2, mark: setting[`${playerName}Color`] },
+  const plateOption: TPlateOption[] = [
+    {
+      text: "마크 모양 : ",
+      id: 1,
+      mark: setting[`${playerName}Pattern`].toString(),
+    },
+    {
+      text: "마크 색깔 : ",
+      id: 2,
+      mark: setting[`${playerName}Color`].toString(),
+    },
     { text: "남은 무르기 : ", id: 3, mark: `${number}회` },
   ];
 

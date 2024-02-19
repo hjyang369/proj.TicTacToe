@@ -27,6 +27,12 @@ export type TOptions = {
   startPlayerOption: string[];
 };
 
+export type TPlateOption = {
+  text: string;
+  id: number;
+  mark: string;
+};
+
 export type TStringObj = {
   [key: string]: string;
 };

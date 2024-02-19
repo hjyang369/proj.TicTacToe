@@ -15,6 +15,7 @@ export default function Square({
   handleClick,
 }: squareProps): JSX.Element {
   const setting = useAtomValue(settingAtom);
+
   let color: string | undefined;
   if (value === setting.player1Pattern) {
     color = colorChip[setting.player1Color];
