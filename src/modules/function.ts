@@ -1,4 +1,4 @@
-const calculateWinCondition = (size, winCondition) => {
+const calculateWinCondition = (size: number, winCondition: number) => {
   // 가로 라인
   const lines = [];
   for (let i = 0; i < size; i++) {
@@ -60,12 +60,12 @@ export const calculateWinner = (
   return null;
 };
 
-export const chooseRandomPlayer = players => {
+export const chooseRandomPlayer = (players: string[]) => {
   const randomIndex = Math.floor(Math.random() * players.length);
   return players[randomIndex];
 };
 
-export const currentTime = new Date().toLocaleString("ko-KR", {
+export const currentTime: string = new Date().toLocaleString("ko-KR", {
   year: "numeric",
   month: "2-digit",
   day: "2-digit",

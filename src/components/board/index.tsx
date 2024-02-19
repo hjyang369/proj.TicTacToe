@@ -4,7 +4,7 @@ import Square from "../square";
 type boardProps = {
   squares: Array<string>;
   handlePlay: (i: number) => void;
-  boardSize?: number;
+  boardSize: number;
 };
 
 export default function Board({

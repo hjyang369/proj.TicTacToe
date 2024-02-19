@@ -18,7 +18,7 @@ export const S = {
     height: 65px;
     span {
       font-size: 15px;
-      line-height: 23px;
+      line-height: 31px;
       font-weight: bold;
       color: ${props => (props.$color ? props.$color : "#fff")};
     }
@@ -26,6 +26,7 @@ export const S = {
       width: ${props => (props.$width ? "41px" : "50px")};
       height: ${props => (props.$width ? "50px" : "50px")};
       span {
+        line-height: 23px;
         font-size: 10.5px;
       }
     }

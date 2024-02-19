@@ -18,7 +18,7 @@ export default function Square({
 }: squareProps): JSX.Element {
   const setting = useAtomValue(settingAtom);
 
-  let color;
+  let color: string | undefined;
   if (value === setting.player1Pattern) {
     color = colorChip[setting.player1Color];
   } else if (value === setting.player2Pattern) {

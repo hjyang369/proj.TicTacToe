@@ -5,6 +5,7 @@ import Button from "../../components/common/button";
 import Player from "./player";
 import Title from "../../components/common/title";
 import { alertMessage } from "../../modules/constants";
+import { THistory, TNumberObj } from "../../types/type";
 //
 import { useState } from "react";
 import { useAtomValue } from "jotai";
@@ -13,29 +14,37 @@ import { calculateWinner, currentTime } from "../../modules/function";
 
 export default function Game(): JSX.Element {
   const setting = useAtomValue(settingAtom);
-  const boardSize = Number(setting.boardSize.slice(0, 1));
-  const rowOfRows = boardSize * boardSize;
+  const boardSize: number = Number(setting.boardSize.slice(0, 1));
+  const rowOfRows: number = boardSize * boardSize;
   const playerOrder = useAtomValue(playerOrderAtom);
-  const [history, setHistory] = useState([Array(rowOfRows).fill("")]);
+  const [history, setHistory] = useState<string[][]>([
+    Array(rowOfRows).fill(""),
+  ]);
   const [currentMove, setCurrentMove] = useState(0);
-  const currentSquares = history[currentMove];
-  const xIsNext = currentMove % 2 === 0;
-  const [remainingTime, setRemainingTime] = useState({
+  const currentSquares: string[] = history[currentMove];
+  const xIsNext: boolean = currentMove % 2 === 0;
+  const [remainingTime, setRemainingTime] = useState<TNumberObj>({
     player1: 3,
     player2: 3,
   });
-  const winner = calculateWinner(
+  const winner: string | null = calculateWinner(
     currentSquares,
     boardSize,
     setting.winCondition,
   );
-  const isFull = currentSquares.filter(mark => mark === "").length === 0;
-  const isFinished = !!winner || (isFull && currentMove > 0);
-  const [moveNum, setMoveNum] = useState(Array(rowOfRows).fill(undefined));
+  const isFull: boolean =
+    currentSquares.filter(mark => mark === "").length === 0;
+  const isFinished: boolean = !!winner || (isFull && currentMove > 0);
+  const [moveNum, setMoveNum] = useState<number[]>(
+    Array(rowOfRows).fill(undefined),
+  );
   const { beforeStartAlert, runOutAlert, finishedAlert } = alertMessage;
 
-  const handleHistory = nextSquares => {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+  const handleHistory = (nextSquares: string[]) => {
+    const nextHistory: string[][] = [
+      ...history.slice(0, currentMove + 1),
+      nextSquares,
+    ];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   };
@@ -50,16 +59,16 @@ export default function Game(): JSX.Element {
     const nextSquares = currentSquares.slice();
     const moveSquares = moveNum.slice();
     if (xIsNext) {
-      nextSquares[i] = setting[`${playerOrder.first}Pattern`];
+      nextSquares[i] = setting[`${playerOrder.first}Pattern`].toString();
     } else {
-      nextSquares[i] = setting[`${playerOrder.second}Pattern`];
+      nextSquares[i] = setting[`${playerOrder.second}Pattern`].toString();
     }
     moveSquares[i] = currentMove + 1;
     handleHistory(nextSquares);
     setMoveNum(moveSquares);
   };
 
-  let status;
+  let status: string;
   if (winner) {
     status = "Winner: " + winner;
   } else if (isFull && currentMove > 0) {
@@ -70,7 +79,7 @@ export default function Game(): JSX.Element {
       (xIsNext ? playerOrder.first : playerOrder.second);
   }
 
-  const minusMove = (player, time) => {
+  const minusMove = (player: string, time: number) => {
     if (currentMove === 0) {
       return alert(beforeStartAlert);
     }
@@ -88,7 +97,8 @@ export default function Game(): JSX.Element {
   };
 
   const saveGame = () => {
-    const prev = JSON.parse(localStorage.getItem("history")) || [];
+    const historyString = localStorage.getItem("history");
+    const prev: THistory[] = historyString ? JSON.parse(historyString) : [];
     const newHistory = [
       ...prev,
       {
