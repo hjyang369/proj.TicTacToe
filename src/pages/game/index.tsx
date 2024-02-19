@@ -4,8 +4,7 @@ import Board from "./board";
 import Button from "../../components/common/button";
 import Player from "./player";
 import Title from "../../components/common/title";
-import { alertMessage } from "../../modules/constants";
-import { THistory, TNumberObj } from "../../types/type";
+import { THistory } from "../../types/type";
 //
 import { useState } from "react";
 import { useAtomValue } from "jotai";
@@ -14,31 +13,28 @@ import { calculateWinner, currentTime } from "../../modules/function";
 
 export default function Game(): JSX.Element {
   const setting = useAtomValue(settingAtom);
+  const playerOrder = useAtomValue(playerOrderAtom);
   const boardSize: number = Number(setting.boardSize.slice(0, 1));
   const rowOfRows: number = boardSize * boardSize;
-  const playerOrder = useAtomValue(playerOrderAtom);
   const [history, setHistory] = useState<string[][]>([
     Array(rowOfRows).fill(""),
   ]);
+  const [moveNum, setMoveNum] = useState<number[]>(
+    Array(rowOfRows).fill(undefined),
+  );
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares: string[] = history[currentMove];
-  const xIsNext: boolean = currentMove % 2 === 0;
-  const [remainingTime, setRemainingTime] = useState<TNumberObj>({
-    player1: 3,
-    player2: 3,
-  });
+  const isNext: boolean = currentMove % 2 === 0;
+
   const winner: string | null = calculateWinner(
     currentSquares,
     boardSize,
     setting.winCondition,
   );
+
   const isFull: boolean =
     currentSquares.filter(mark => mark === "").length === 0;
   const isFinished: boolean = !!winner || (isFull && currentMove > 0);
-  const [moveNum, setMoveNum] = useState<number[]>(
-    Array(rowOfRows).fill(undefined),
-  );
-  const { beforeStartAlert, runOutAlert, finishedAlert } = alertMessage;
 
   const handleHistory = (nextSquares: string[]) => {
     const nextHistory: string[][] = [
@@ -49,25 +45,6 @@ export default function Game(): JSX.Element {
     setCurrentMove(nextHistory.length - 1);
   };
 
-  const handlePlay = (i: number) => {
-    if (
-      currentSquares[i] ||
-      calculateWinner(currentSquares, boardSize, setting.winCondition)
-    ) {
-      return;
-    }
-    const nextSquares = currentSquares.slice();
-    const moveSquares = moveNum.slice();
-    if (xIsNext) {
-      nextSquares[i] = setting[`${playerOrder.first}Pattern`].toString();
-    } else {
-      nextSquares[i] = setting[`${playerOrder.second}Pattern`].toString();
-    }
-    moveSquares[i] = currentMove + 1;
-    handleHistory(nextSquares);
-    setMoveNum(moveSquares);
-  };
-
   let status: string;
   if (winner) {
     status = "Winner: " + winner;
@@ -76,25 +53,8 @@ export default function Game(): JSX.Element {
   } else {
     status =
       "현재 마크 놓을 플레이어 : " +
-      (xIsNext ? playerOrder.first : playerOrder.second);
+      (isNext ? playerOrder.first : playerOrder.second);
   }
-
-  const minusMove = (player: string, time: number) => {
-    if (currentMove === 0) {
-      return alert(beforeStartAlert);
-    }
-    if (time === 0) {
-      return alert(runOutAlert);
-    }
-    if (winner) {
-      return alert(finishedAlert);
-    }
-    setCurrentMove(prev => prev - 1);
-    setRemainingTime(prevState => ({
-      ...prevState,
-      [player]: prevState[player] - 1,
-    }));
-  };
 
   const saveGame = () => {
     const historyString = localStorage.getItem("history");
@@ -121,21 +81,27 @@ export default function Game(): JSX.Element {
         <div>
           <Board
             squares={currentSquares}
-            handlePlay={handlePlay}
+            handleHistory={handleHistory}
             boardSize={boardSize}
+            moveNum={moveNum}
+            setMoveNum={setMoveNum}
+            isNext={isNext}
+            currentMove={currentMove}
           />
         </div>
         <S.Settings>
           <S.Players>
             <Player
               playerName="player1"
-              number={remainingTime.player1}
-              minusMove={minusMove}
+              currentMove={currentMove}
+              winner={winner}
+              setCurrentMove={setCurrentMove}
             />
             <Player
               playerName="player2"
-              number={remainingTime.player2}
-              minusMove={minusMove}
+              currentMove={currentMove}
+              winner={winner}
+              setCurrentMove={setCurrentMove}
             />
           </S.Players>
           {isFinished ? (

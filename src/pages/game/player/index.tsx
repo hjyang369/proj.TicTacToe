@@ -1,24 +1,32 @@
 // css, 컴포넌트, 상수, 타입
 import { S } from "./style";
 import Toggle from "../../../components/common/toggle";
-import { colorChip } from "../../../modules/constants";
-import { TPlateOption } from "../../../types/type";
+import { alertMessage, colorChip } from "../../../modules/constants";
+import { TNumberObj, TPlateOption } from "../../../types/type";
 //
+import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { settingAtom } from "../../../store/atom";
 
 type playerProps = {
   playerName: string;
-  number: number;
-  minusMove: (player: string, time: number) => void;
+  currentMove: number;
+  winner: string | null;
+  setCurrentMove: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function Player({
   playerName,
-  number,
-  minusMove,
+  currentMove,
+  winner,
+  setCurrentMove,
 }: playerProps): JSX.Element {
   const setting = useAtomValue(settingAtom);
+  const { beforeStartAlert, runOutAlert, finishedAlert } = alertMessage;
+  const [remainingTime, setRemainingTime] = useState<TNumberObj>({
+    player1: 3,
+    player2: 3,
+  });
 
   const plateOption: TPlateOption[] = [
     {
@@ -31,8 +39,25 @@ export default function Player({
       id: 2,
       mark: setting[`${playerName}Color`].toString(),
     },
-    { text: "남은 무르기 : ", id: 3, mark: `${number}회` },
+    { text: "남은 무르기 : ", id: 3, mark: `${remainingTime[playerName]}회` },
   ];
+
+  const minusMove = (player: string, time: number) => {
+    if (currentMove === 0) {
+      return alert(beforeStartAlert);
+    }
+    if (time === 0) {
+      return alert(runOutAlert);
+    }
+    if (winner) {
+      return alert(finishedAlert);
+    }
+    setCurrentMove(prev => prev - 1);
+    setRemainingTime(prevState => ({
+      ...prevState,
+      [player]: prevState[player] - 1,
+    }));
+  };
 
   return (
     <S.Container>
@@ -56,7 +81,7 @@ export default function Player({
       <Toggle
         text={`${playerName} 무르기`}
         width="135px"
-        onclick={() => minusMove(playerName, number)}
+        onclick={() => minusMove(playerName, remainingTime[playerName])}
       />
     </S.Container>
   );
