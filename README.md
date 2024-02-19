@@ -102,13 +102,13 @@ npm start
 # 구현사항
 
 ## 0. 레이아웃 및 반응형 웹
-코드 참고 :
+코드 참고 : https://github.com/hjyang369/proj.TicTacToe/pull/6
 
 - UI에 따라 IPhone 14 PRO Max 또는 IPad air를 기준으로 미디어 쿼리 적용하여 반응형 웹 구현하였습니다.
 - 일관된 UI를 보여주기 위해 button, title 등 공통 컴포넌트 적용하였습니다.
   
 ## 1. 메인 페이지
-코드 참고 :
+코드 참고 : https://github.com/hjyang369/proj.TicTacToe/pull/1
 
 - [x] 게임 시작 버튼 클릭 시 설정 페이지로 이동합니다.
 - [x] 저장된 게임 버튼 클릭 시 결과 페이지로 이동합니다.
@@ -118,7 +118,8 @@ npm start
 
 
 ## 2. 설정 페이지
-코드 참고 :
+코드 참고 : https://github.com/hjyang369/proj.TicTacToe/pull/2
+코드 참고 : https://github.com/hjyang369/proj.TicTacToe/pull/5
 
 - [x] 게임판의 크기( 3x3 ~ 9x9 )를 설정 할 수 있습니다.
 - [x] 승리 조건( 최소: 3, 최대: 9 )을 설정 할 수 있습니다.
@@ -134,7 +135,7 @@ npm start
 
 
 ## 3. 게임 페이지
-코드 참고 :
+코드 참고 : https://github.com/hjyang369/proj.TicTacToe/pull/3
 
 - [x] 두 플레이어에 대한 정보(마크, 마크색, 남은 무르기 횟수)가 표시됩니다.
 - [x] 각 플레이어는 경기가 시작되었을 때부터 종료되기 전까지 무르기를 최대 3번까지 할 수 있습니다.
@@ -150,7 +151,7 @@ npm start
 
 
 ## 4. 결과 페이지
-코드 참고 :
+코드 참고 : https://github.com/hjyang369/proj.TicTacToe/pull/4
 
 - [x] 현재 기기에서 이전에 했던 저장된 게임의 목록을 확인할 수 있습니다.
 - [x] 게임을 종료했던 날짜와 시간이 리스트로 보여집니다.
