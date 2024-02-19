@@ -2,13 +2,13 @@
 import { S } from "./style";
 import Button from "../../components/common/button";
 import Select from "../../components/common/select";
+import Title from "../../components/common/title";
 import { options, initValue } from "../../modules/constants";
 //
 import { useSetAtom } from "jotai";
 import { playerOrderAtom, settingAtom } from "../../store/atom";
 import { chooseRandomPlayer } from "../../modules/function";
 import useSelectValue from "../../hooks/useInputValue";
-import Title from "../../components/common/title";
 
 export default function Readiness(): JSX.Element {
   const { selectValue, handleValue } = useSelectValue(initValue);
