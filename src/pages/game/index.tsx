@@ -76,7 +76,7 @@ export default function Game(): JSX.Element {
 
   return (
     <S.Container>
-      <Title value={status} margin="70px" />
+      <Title value={status} />
       <S.BoardContainer>
         <div>
           <Board

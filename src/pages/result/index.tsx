@@ -19,7 +19,7 @@ export default function Result(): JSX.Element {
 
   return (
     <S.Container>
-      <Title value="게임 결과" margin="70px" />
+      <Title value="게임 결과" />
       <S.Result>
         {history.map(content => {
           return (

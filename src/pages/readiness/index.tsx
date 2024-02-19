@@ -43,13 +43,13 @@ export default function Readiness(): JSX.Element {
 
   return (
     <S.Container>
-      <Title value="게임 설정" margin="70px" />
+      <Title value="게임 설정" />
       <S.SettingContainer>
         <S.Space>
           <S.Subject>게임판의 크기</S.Subject>
           <Select
             name="boardSize"
-            handleInput={handleValue}
+            handleValue={handleValue}
             value={selectValue.boardSize}
             options={boardSizeOption}
           />
@@ -58,7 +58,7 @@ export default function Readiness(): JSX.Element {
           <S.Subject>승리 조건</S.Subject>
           <Select
             name="winCondition"
-            handleInput={handleValue}
+            handleValue={handleValue}
             value={selectValue.winCondition}
             options={winConditionOption}
           />
@@ -69,14 +69,14 @@ export default function Readiness(): JSX.Element {
             <Select
               title="색깔"
               name="player1Color"
-              handleInput={handleValue}
+              handleValue={handleValue}
               value={selectValue.player1Color}
               options={colorOption}
             />
             <Select
               title="모양"
               name="player1Pattern"
-              handleInput={handleValue}
+              handleValue={handleValue}
               value={selectValue.player1Pattern}
               options={shapeOption}
             />
@@ -88,14 +88,14 @@ export default function Readiness(): JSX.Element {
             <Select
               title="색깔"
               name="player2Color"
-              handleInput={handleValue}
+              handleValue={handleValue}
               value={selectValue.player2Color}
               options={colorOption}
             />
             <Select
               title="모양"
               name="player2Pattern"
-              handleInput={handleValue}
+              handleValue={handleValue}
               value={selectValue.player2Pattern}
               options={shapeOption}
             />
@@ -106,7 +106,7 @@ export default function Readiness(): JSX.Element {
           <S.Selects>
             <Select
               name="startPlayer"
-              handleInput={handleValue}
+              handleValue={handleValue}
               value={selectValue.startPlayer}
               options={startPlayerOption}
             />

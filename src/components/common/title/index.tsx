@@ -2,18 +2,9 @@ import { S } from "./style";
 
 type titleProps = {
   value: string;
-  margin: string;
-  isMain?: string;
+  isMain?: boolean;
 };
 
-export default function Title({
-  value,
-  margin,
-  isMain,
-}: titleProps): JSX.Element {
-  return (
-    <S.Title $margin={margin} $isMain={isMain}>
-      {value}
-    </S.Title>
-  );
+export default function Title({ value, isMain }: titleProps): JSX.Element {
+  return <S.Title $isMain={isMain}>{value}</S.Title>;
 }
