@@ -6,12 +6,14 @@ type squareProps = {
   value: string;
   setting: TSelectValue;
   moveNum: number;
+  width: boolean;
 };
 
 export default function Square({
   value,
   setting,
   moveNum,
+  width,
 }: squareProps): JSX.Element {
   let color;
   if (value === setting.player1Pattern) {
@@ -21,9 +23,9 @@ export default function Square({
   }
 
   return (
-    <S.Square $color={color}>
-      {value}
-      <br />({moveNum}번째)
+    <S.Square $color={color} $width={width}>
+      <span>{value}</span>
+      <span>({moveNum}번째)</span>
     </S.Square>
   );
 }

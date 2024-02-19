@@ -7,12 +7,6 @@ export const S = {
     justify-content: center;
     align-items: center;
   `,
-  Title: styled.h1`
-    font-weight: 700;
-    font-size: 40px;
-    color: ${props => props.theme.mainColor};
-    margin: 150px 0 70px 0;
-  `,
 
   SettingContainer: styled.div`
     width: 400px;
@@ -21,7 +15,11 @@ export const S = {
     align-items: center;
     gap: 20px;
     margin-bottom: 50px;
+    @media (max-width: 415px) {
+      width: 350px;
+    }
   `,
+
   Space: styled.div`
     width: 100%;
     display: flex;
@@ -29,19 +27,23 @@ export const S = {
     align-items: center;
     gap: 10px;
   `,
+
   Subject: styled.span`
     font-size: 20px;
   `,
+
   NumberInput: styled.input`
     width: 50px;
     height: 30px;
   `,
+
   Selects: styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
   `,
+
   Caution: styled.span`
     font-size: 13.8px;
     color: #ff1516;
