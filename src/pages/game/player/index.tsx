@@ -21,8 +21,9 @@ export default function Player({
   winner,
   setCurrentMove,
 }: playerProps): JSX.Element {
-  const setting = useAtomValue(settingAtom);
-  const { beforeStartAlert, runOutAlert, finishedAlert } = alertMessage;
+  const setting = useAtomValue(settingAtom); // 유저가 설정한 조건이 저장된 전역 상태
+  const { beforeStartAlert, runOutAlert, finishedAlert } = alertMessage; // alert 메세지 상수 데이터
+  //무르기 횟수 상태
   const [remainingTime, setRemainingTime] = useState<TNumberObj>({
     player1: 3,
     player2: 3,
