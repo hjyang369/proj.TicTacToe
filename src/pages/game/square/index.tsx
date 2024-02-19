@@ -1,9 +1,9 @@
 // css, 컴포넌트, 상수, 타입
 import { S } from "./style";
-import { colorChip } from "../../modules/constants";
+import { colorChip } from "../../../modules/constants";
 //
 import { useAtomValue } from "jotai";
-import { settingAtom } from "../../store/atom";
+import { settingAtom } from "../../../store/atom";
 
 type squareProps = {
   value: string;

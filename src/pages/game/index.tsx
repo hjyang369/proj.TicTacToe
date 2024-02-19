@@ -1,6 +1,6 @@
 // css, 컴포넌트, 상수, 타입
 import { S } from "./style";
-import Board from "../../components/board";
+import Board from "./board";
 import Button from "../../components/common/button";
 import Player from "./player";
 import Title from "../../components/common/title";
