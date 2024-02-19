@@ -5,7 +5,7 @@ import Title from "../../components/common/title";
 export default function Main(): JSX.Element {
   return (
     <S.Container>
-      <Title value="Tic Tac Toe" margin="200px" isMain="250px" />
+      <Title value="Tic Tac Toe" isMain />
       <div>
         <Button text="게임 시작" path="/readiness" />
         <Button text="저장된 게임" path="/result" />

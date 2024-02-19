@@ -15,6 +15,7 @@ export default function Square({
   moveNum,
   width,
 }: squareProps): JSX.Element {
+  //동적으로 유저가 설정한 색깔 지정
   let color: string | undefined;
   if (value === setting.player1Pattern) {
     color = colorChip[setting.player1Color];
