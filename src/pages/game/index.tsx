@@ -107,7 +107,7 @@ export default function Game(): JSX.Element {
           {isFinished ? (
             <Button
               text="게임 저장하기"
-              saveGame={saveGame}
+              handelGame={saveGame}
               path="/result"
               width="309px"
             />

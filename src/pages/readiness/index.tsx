@@ -119,7 +119,7 @@ export default function Readiness(): JSX.Element {
           </S.Caution>
         </S.Space>
       </S.SettingContainer>
-      <Button text="게임 시작" startGame={startGame} path="/game" />
+      <Button text="게임 시작" handelGame={startGame} path="/game" />
     </S.Container>
   );
 }

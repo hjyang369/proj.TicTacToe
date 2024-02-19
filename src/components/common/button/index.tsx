@@ -7,16 +7,14 @@ type buttonProps = {
   text: string;
   width?: string;
   path: string;
-  startGame?: () => void;
-  saveGame?: () => void;
+  handelGame?: () => void; // 게임 설정 및 게임 결과 저장 함수
 };
 
 export default function Button({
   text,
   width,
   path,
-  startGame,
-  saveGame,
+  handelGame,
 }: buttonProps): JSX.Element {
   const navigate = useNavigate();
 
@@ -24,11 +22,10 @@ export default function Button({
     navigate(path);
   };
 
+  // 게임 설정 및 게임 결과 저장 함수 있으면 실행 후 페이지 이동
   const onclick = () => {
-    if (startGame) {
-      startGame();
-    } else if (saveGame) {
-      saveGame();
+    if (handelGame) {
+      handelGame();
     }
     moveToPage(path);
   };
