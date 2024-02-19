@@ -7,11 +7,4 @@ export const S = {
     justify-content: center;
     align-items: center;
   `,
-
-  Title: styled.h1`
-    font-weight: 700;
-    font-size: 40px;
-    color: ${props => props.theme.mainColor};
-    margin: 150px 0;
-  `,
 };

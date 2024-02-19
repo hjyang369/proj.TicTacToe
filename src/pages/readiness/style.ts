@@ -8,16 +8,6 @@ export const S = {
     align-items: center;
   `,
 
-  Title: styled.h1`
-    font-weight: 700;
-    font-size: 40px;
-    color: ${props => props.theme.mainColor};
-    margin: 150px 0 70px 0;
-    @media (max-width: 415px) {
-      margin: 80px 0 70px 0;
-    }
-  `,
-
   SettingContainer: styled.div`
     width: 400px;
     display: flex;

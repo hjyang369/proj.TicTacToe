@@ -8,6 +8,7 @@ import { useSetAtom } from "jotai";
 import { playerOrderAtom, settingAtom } from "../../store/atom";
 import { chooseRandomPlayer } from "../../modules/function";
 import useSelectValue from "../../hooks/useInputValue";
+import Title from "../../components/common/title";
 
 export default function Readiness(): JSX.Element {
   const { selectValue, handleValue } = useSelectValue(initValue);
@@ -40,7 +41,7 @@ export default function Readiness(): JSX.Element {
 
   return (
     <S.Container>
-      <S.Title>게임 설정</S.Title>
+      <Title value="게임 설정" margin="70px" />
       <S.SettingContainer>
         <S.Space>
           <S.Subject>게임판의 크기</S.Subject>

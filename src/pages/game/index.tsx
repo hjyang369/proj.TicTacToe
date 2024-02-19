@@ -3,6 +3,7 @@ import { S } from "./style";
 import Board from "../../components/board";
 import Button from "../../components/common/button";
 import Player from "./player";
+import Title from "../../components/common/title";
 import { alertMessage } from "../../modules/constants";
 //
 import { useState } from "react";
@@ -105,7 +106,7 @@ export default function Game(): JSX.Element {
 
   return (
     <S.Container>
-      <S.Title>{status}</S.Title>
+      <Title value={status} margin="70px" />
       <S.BoardContainer>
         <div>
           <Board

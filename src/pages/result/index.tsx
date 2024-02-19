@@ -6,6 +6,7 @@ import Toggle from "../../components/common/toggle";
 import { TBooleanObj } from "../../types/type";
 //
 import { useState } from "react";
+import Title from "../../components/common/title";
 
 export default function Result(): JSX.Element {
   const [toggle, setToggle] = useState<TBooleanObj>({});
@@ -16,7 +17,7 @@ export default function Result(): JSX.Element {
 
   return (
     <S.Container>
-      <S.Title>게임 결과</S.Title>
+      <Title value="게임 결과" margin="70px" />
       <S.Result>
         {history.map(content => {
           return (
