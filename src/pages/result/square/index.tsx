@@ -15,7 +15,7 @@ export default function Square({
   moveNum,
   width,
 }: squareProps): JSX.Element {
-  let color;
+  let color: string | undefined;
   if (value === setting.player1Pattern) {
     color = colorChip[setting.player1Color];
   } else if (value === setting.player2Pattern) {

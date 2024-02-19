@@ -14,7 +14,7 @@ export default function Readiness(): JSX.Element {
   const { selectValue, handleValue } = useSelectValue(initValue);
   const setSetting = useSetAtom(settingAtom);
   const setOrder = useSetAtom(playerOrderAtom);
-  const winScore = selectValue.winCondition;
+  const winScore: number = selectValue.winCondition;
   const {
     boardSizeOption,
     colorOption,
@@ -24,18 +24,20 @@ export default function Readiness(): JSX.Element {
   } = options;
 
   const startGame = () => {
-    const playerArr = startPlayerOption.slice(1, 3);
+    const playerArr: string[] = startPlayerOption.slice(1, 3);
     if (selectValue.startPlayer === "random") {
-      const isFirstPlayer = chooseRandomPlayer(playerArr);
-      const secondPlayer = playerArr.filter(player => player !== isFirstPlayer);
+      const isFirstPlayer: string = chooseRandomPlayer(playerArr);
+      const [secondPlayer]: string[] = playerArr.filter(
+        player => player !== isFirstPlayer,
+      );
       setSetting(selectValue);
-      setOrder({ first: isFirstPlayer, second: secondPlayer[0] });
+      setOrder({ first: isFirstPlayer, second: secondPlayer });
     } else {
-      const secondPlayer = playerArr.filter(
+      const [secondPlayer]: string[] = playerArr.filter(
         player => player !== selectValue.startPlayer,
       );
       setSetting(selectValue);
-      setOrder({ first: selectValue.startPlayer, second: secondPlayer[0] });
+      setOrder({ first: selectValue.startPlayer, second: secondPlayer });
     }
   };
 

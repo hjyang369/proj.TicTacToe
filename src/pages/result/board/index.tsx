@@ -15,8 +15,8 @@ export default function Board({
   setting,
   moveNum,
 }: boardProps): JSX.Element {
-  const row = Array.from({ length: boardSize }, (_, index) => index);
-  const result = squares[squares.length - 1];
+  const row: number[] = Array.from({ length: boardSize }, (_, index) => index);
+  const result: string = squares[squares.length - 1];
 
   return (
     <>
