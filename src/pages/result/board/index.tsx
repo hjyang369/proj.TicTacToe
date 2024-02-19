@@ -31,6 +31,7 @@ export default function Board({
                   value={result[index]}
                   setting={setting}
                   moveNum={moveNum[index]}
+                  width={boardSize >= 8}
                 />
               );
             })}

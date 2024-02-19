@@ -3,6 +3,7 @@ import { S } from "./style";
 import Board from "./board/index";
 import Button from "../../components/common/button";
 import Toggle from "../../components/common/toggle";
+import Title from "../../components/common/title";
 import { TBooleanObj, THistory } from "../../types/type";
 //
 import { useState } from "react";
@@ -18,7 +19,7 @@ export default function Result(): JSX.Element {
 
   return (
     <S.Container>
-      <S.Title>게임 결과</S.Title>
+      <Title value="게임 결과" margin="70px" />
       <S.Result>
         {history.map(content => {
           return (

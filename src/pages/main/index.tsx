@@ -1,10 +1,11 @@
 import { S } from "./style";
 import Button from "../../components/common/button";
+import Title from "../../components/common/title";
 
 export default function Main(): JSX.Element {
   return (
     <S.Container>
-      <S.Title>Tic Tac Toe</S.Title>
+      <Title value="Tic Tac Toe" margin="200px" isMain="250px" />
       <div>
         <Button text="게임 시작" path="/readiness" />
         <Button text="저장된 게임" path="/result" />

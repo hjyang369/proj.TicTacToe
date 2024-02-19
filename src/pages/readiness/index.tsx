@@ -2,6 +2,7 @@
 import { S } from "./style";
 import Button from "../../components/common/button";
 import Select from "../../components/common/select";
+import Title from "../../components/common/title";
 import { options, initValue } from "../../modules/constants";
 //
 import { useSetAtom } from "jotai";
@@ -40,7 +41,7 @@ export default function Readiness(): JSX.Element {
 
   return (
     <S.Container>
-      <S.Title>게임 설정</S.Title>
+      <Title value="게임 설정" margin="70px" />
       <S.SettingContainer>
         <S.Space>
           <S.Subject>게임판의 크기</S.Subject>

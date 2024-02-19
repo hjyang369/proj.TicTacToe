@@ -8,11 +8,13 @@ import { settingAtom } from "../../store/atom";
 type squareProps = {
   value: string;
   handleClick: () => void;
+  width: boolean;
 };
 
 export default function Square({
   value,
   handleClick,
+  width,
 }: squareProps): JSX.Element {
   const setting = useAtomValue(settingAtom);
 
@@ -24,7 +26,7 @@ export default function Square({
   }
 
   return (
-    <S.Square onClick={handleClick} $color={color}>
+    <S.Square onClick={handleClick} $color={color} $width={width}>
       {value}
     </S.Square>
   );
