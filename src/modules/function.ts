@@ -1,36 +1,47 @@
-const calculateWinCondition = size => {
+const calculateWinCondition = (size, winCondition) => {
   // 가로 라인
   const lines = [];
   for (let i = 0; i < size; i++) {
-    const line = [];
-    for (let j = 0; j < size; j++) {
-      line.push(i * size + j);
+    for (let j = 0; j <= size - winCondition; j++) {
+      const line = [];
+      for (let k = 0; k < winCondition; k++) {
+        line.push(i * size + j + k);
+      }
+      lines.push(line);
     }
-    lines.push(line);
   }
   // 세로 라인
   for (let i = 0; i < size; i++) {
-    const line = [];
-    for (let j = 0; j < size; j++) {
-      line.push(j * size + i);
+    for (let j = 0; j <= size - winCondition; j++) {
+      const line = [];
+      for (let k = 0; k < winCondition; k++) {
+        line.push((j + k) * size + i);
+      }
+      lines.push(line);
     }
-    lines.push(line);
   }
   // 대각선 라인
-  const diagonal1 = [];
-  const diagonal2 = [];
-  for (let i = 0; i < size; i++) {
-    diagonal1.push(i * size + i);
-    diagonal2.push(i * size + (size - 1 - i));
+  for (let i = 0; i <= size - winCondition; i++) {
+    for (let j = 0; j <= size - winCondition; j++) {
+      const line1 = [];
+      const line2 = [];
+      for (let k = 0; k < winCondition; k++) {
+        line1.push((i + k) * size + j + k);
+        line2.push((i + k) * size + j + (winCondition - 1 - k));
+      }
+      lines.push(line1);
+      lines.push(line2);
+    }
   }
-  lines.push(diagonal1);
-  lines.push(diagonal2);
-
   return lines;
 };
 
-export const calculateWinner = (squares: Array<string>, boardSize: number) => {
-  const lines = calculateWinCondition(boardSize);
+export const calculateWinner = (
+  squares: Array<string>,
+  boardSize: number,
+  winCondition: number,
+) => {
+  const lines = calculateWinCondition(boardSize, winCondition);
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const lineSize = line.length;

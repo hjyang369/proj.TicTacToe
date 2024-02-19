@@ -21,7 +21,11 @@ export default function Game(): JSX.Element {
     player1: 3,
     player2: 3,
   });
-  const winner = calculateWinner(currentSquares, boardSize);
+  const winner = calculateWinner(
+    currentSquares,
+    boardSize,
+    setting.winCondition,
+  );
   const isFull = currentSquares.filter(mark => mark === "").length === 0;
   const isFinished = !!winner || (isFull && currentMove > 0);
   const [moveNum, setMoveNum] = useState(Array(rowOfRows).fill(undefined));
@@ -33,7 +37,10 @@ export default function Game(): JSX.Element {
   };
 
   const handlePlay = (i: number) => {
-    if (currentSquares[i] || calculateWinner(currentSquares, boardSize)) {
+    if (
+      currentSquares[i] ||
+      calculateWinner(currentSquares, boardSize, setting.winCondition)
+    ) {
       return;
     }
     const nextSquares = currentSquares.slice();
