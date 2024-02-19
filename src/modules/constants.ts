@@ -46,4 +46,7 @@ export const alertMessage = {
     "플레이어 1과 플레이어 2의 색상은 서로 다른 모양을 선택해야 합니다. 다시 선택해주세요.",
   winConditionAlert:
     "승리 조건은 보드 판의 크기보다 작거나 같아야합니다. 다시 골라주세요.",
+  beforeStartAlert: "게임 시작 전입니다. 게임 시작 후 무르기를 해주세요.",
+  runOutAlert: "무르기 횟수를 모두 사용하셨습니다.",
+  finishedAlert: "이미 게임이 끝나서 무르기를 할 수 없습니다.",
 };
