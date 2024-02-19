@@ -3,8 +3,8 @@ import { S } from "./style";
 type selectProps = {
   title?: string;
   name: string;
-  value: string;
-  options: string[];
+  value: string | number;
+  options: string[] | number[];
   handleInput: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 

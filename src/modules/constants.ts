@@ -1,3 +1,5 @@
+export const winConditionOption = [3, 4, 5, 6, 7, 8, 9];
+
 export const boardSizeOption = [
   "3 X 3",
   "4 X 4",
@@ -24,6 +26,7 @@ export const startPlayerOption = ["random", "player1", "player2"];
 
 export const initValue = {
   boardSize: "3 X 3",
+  winCondition: 3,
   player1Color: "blue",
   player1Pattern: "X",
   player2Color: "red",
@@ -34,3 +37,10 @@ export const whoIsStartPlayer = {
   first: "",
   second: "",
 };
+
+export const colorAlert =
+  "플레이어 1과 플레이어 2의 색상은 서로 다른 색을 선택해야 합니다. 다시 선택해주세요.";
+export const shapeAlert =
+  "플레이어 1과 플레이어 2의 색상은 서로 다른 모양을 선택해야 합니다. 다시 선택해주세요.";
+export const winConditionAlert =
+  "승리 조건은 보드 판의 크기보다 작거나 같아야합니다. 다시 골라주세요.";

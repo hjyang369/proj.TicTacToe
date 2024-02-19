@@ -1,9 +1,9 @@
-import { TStringObj } from "../../../types/type";
+import { TSelectValue } from "../../../types/type";
 import { S } from "./style";
 
 type squareProps = {
   value: string;
-  setting: TStringObj;
+  setting: TSelectValue;
   moveNum: number;
 };
 export default function Square({

@@ -1,11 +1,11 @@
-import { TStringObj } from "../../../types/type";
+import { TSelectValue } from "../../../types/type";
 import Square from "../square/index";
 import { S } from "./style";
 
 type boardProps = {
   squares: Array<string>;
   boardSize?: number;
-  setting: TStringObj;
+  setting: TSelectValue;
   moveNum: Array<number>;
 };
 
