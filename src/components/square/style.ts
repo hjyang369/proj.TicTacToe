@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 export const S = {
   Square: styled.button<{
     $color?: string;
+    $width: boolean;
   }>`
     background: #fff;
     border: 1px solid #999;
@@ -17,5 +18,9 @@ export const S = {
     width: 50px;
     height: 50px;
     color: ${props => (props.$color ? props.$color : "#fff")};
+    @media (max-width: 430px) {
+      width: ${props => (props.$width ? "40px" : "50px")};
+      height: ${props => (props.$width ? "40px" : "50px")};
+    }
   `,
 };

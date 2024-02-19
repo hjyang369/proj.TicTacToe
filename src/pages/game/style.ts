@@ -15,6 +15,9 @@ export const S = {
     justify-content: center;
     align-items: center;
     gap: 70px;
+    @media (max-width: 820px) {
+      flex-direction: column;
+    }
   `,
 
   Settings: styled.div`

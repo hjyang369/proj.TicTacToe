@@ -13,7 +13,6 @@ export default function Board({
   boardSize,
 }: boardProps): JSX.Element {
   const row = Array.from({ length: boardSize }, (_, index) => index);
-
   return (
     <>
       {row.map((ele, i) => {
@@ -26,6 +25,7 @@ export default function Board({
                   key={index}
                   value={squares[index]}
                   handleClick={() => handlePlay(index)}
+                  width={boardSize >= 8}
                 />
               );
             })}

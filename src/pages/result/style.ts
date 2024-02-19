@@ -7,6 +7,10 @@ export const S = {
     justify-content: center;
     align-items: center;
     gap: 15px;
+    padding-bottom: 150px;
+    @media (max-width: 430px) {
+      padding-bottom: 80px;
+    }
   `,
 
   BoardContainer: styled.div`
