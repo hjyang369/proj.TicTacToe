@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router";
+// css, 컴포넌트, 상수, 타입
 import { S } from "./style";
+//
+import { useNavigate } from "react-router";
 
 type buttonProps = {
   text: string;
@@ -8,6 +10,7 @@ type buttonProps = {
   startGame?: () => void;
   saveGame?: () => void;
 };
+
 export default function Button({
   text,
   width,

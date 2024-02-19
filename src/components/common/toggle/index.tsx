@@ -5,6 +5,7 @@ type toggleProps = {
   width?: string;
   onclick?: () => void;
 };
+
 export default function Toggle({
   text,
   width,

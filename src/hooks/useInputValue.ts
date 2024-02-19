@@ -1,13 +1,12 @@
-import { useState } from "react";
+// css, 컴포넌트, 상수, 타입
+import { alertMessage } from "../modules/constants";
 import { TSelectValue } from "../types/type";
-import {
-  colorAlert,
-  shapeAlert,
-  winConditionAlert,
-} from "../modules/constants";
+//
+import { useState } from "react";
 
 const useSelectValue = (initInput: TSelectValue) => {
   const [selectValue, setSelectValue] = useState<TSelectValue>(initInput);
+  const { colorAlert, shapeAlert, winConditionAlert } = alertMessage;
 
   const handleValue = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const { name, value } = e.target;

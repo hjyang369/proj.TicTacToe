@@ -1,6 +1,8 @@
-import { useAtomValue } from "jotai";
-import Toggle from "../../../components/common/toggle";
+// css, 컴포넌트, 상수, 타입
 import { S } from "./style";
+import Toggle from "../../../components/common/toggle";
+//
+import { useAtomValue } from "jotai";
 import { settingAtom } from "../../../store/atom";
 
 type playerProps = {

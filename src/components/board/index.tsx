@@ -1,5 +1,5 @@
-import Square from "../square";
 import { S } from "./style";
+import Square from "../square";
 
 type boardProps = {
   squares: Array<string>;

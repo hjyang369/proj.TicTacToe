@@ -1,5 +1,5 @@
-import { TSelectValue } from "../../../types/type";
 import { S } from "./style";
+import { TSelectValue } from "../../../types/type";
 
 type squareProps = {
   value: string;

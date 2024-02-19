@@ -1,6 +1,8 @@
-import { TSelectValue } from "../../../types/type";
-import Square from "../square/index";
+// css, 컴포넌트, 상수, 타입
 import { S } from "./style";
+import Square from "../square/index";
+//
+import { TSelectValue } from "../../../types/type";
 
 type boardProps = {
   squares: Array<string>;

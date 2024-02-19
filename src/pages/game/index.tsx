@@ -1,11 +1,12 @@
+// css, 컴포넌트, 상수, 타입
 import { S } from "./style";
-//
-import { useAtomValue } from "jotai";
 import Board from "../../components/board";
 import Button from "../../components/common/button";
-import { playerOrderAtom, settingAtom } from "../../store/atom";
 import Player from "./player";
+//
 import { useState } from "react";
+import { useAtomValue } from "jotai";
+import { playerOrderAtom, settingAtom } from "../../store/atom";
 import { calculateWinner, currentTime } from "../../modules/function";
 
 export default function Game(): JSX.Element {

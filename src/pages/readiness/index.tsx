@@ -1,17 +1,11 @@
+// css, 컴포넌트, 상수, 타입
 import { S } from "./style";
-//
 import Button from "../../components/common/button";
+import Select from "../../components/common/select";
+import { options, initValue } from "../../modules/constants";
+//
 import { useSetAtom } from "jotai";
 import { playerOrderAtom, settingAtom } from "../../store/atom";
-import Select from "../../components/common/select";
-import {
-  boardSizeOption,
-  colorOption,
-  initValue,
-  shapeOption,
-  startPlayerOption,
-  winConditionOption,
-} from "../../modules/constants";
 import { chooseRandomPlayer } from "../../modules/function";
 import useSelectValue from "../../hooks/useInputValue";
 
@@ -20,6 +14,13 @@ export default function Readiness(): JSX.Element {
   const setSetting = useSetAtom(settingAtom);
   const setOrder = useSetAtom(playerOrderAtom);
   const winScore = selectValue.winCondition;
+  const {
+    boardSizeOption,
+    colorOption,
+    shapeOption,
+    startPlayerOption,
+    winConditionOption,
+  } = options;
 
   const startGame = () => {
     const playerArr = startPlayerOption.slice(1, 3);
