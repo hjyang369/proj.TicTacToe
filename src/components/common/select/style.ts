@@ -8,7 +8,7 @@ export const S = {
     gap: 10px;
     select {
       text-align: center;
-      width: 60px;
+      width: 67px;
       height: 30px;
     }
   `,

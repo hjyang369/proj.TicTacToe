@@ -1,12 +1,14 @@
+// css, 컴포넌트, 상수, 타입
 import { S } from "./style";
-//
-import { useAtomValue } from "jotai";
 import Board from "../../components/board";
 import Button from "../../components/common/button";
-import { playerOrderAtom, settingAtom } from "../../store/atom";
 import Player from "./player";
+import { alertMessage } from "../../modules/constants";
+//
 import { useState } from "react";
-import { calculateWinner, currentTime } from "../../modules/fuction";
+import { useAtomValue } from "jotai";
+import { playerOrderAtom, settingAtom } from "../../store/atom";
+import { calculateWinner, currentTime } from "../../modules/function";
 
 export default function Game(): JSX.Element {
   const setting = useAtomValue(settingAtom);
@@ -21,10 +23,15 @@ export default function Game(): JSX.Element {
     player1: 3,
     player2: 3,
   });
-  const winner = calculateWinner(currentSquares, boardSize);
+  const winner = calculateWinner(
+    currentSquares,
+    boardSize,
+    setting.winCondition,
+  );
   const isFull = currentSquares.filter(mark => mark === "").length === 0;
   const isFinished = !!winner || (isFull && currentMove > 0);
   const [moveNum, setMoveNum] = useState(Array(rowOfRows).fill(undefined));
+  const { beforeStartAlert, runOutAlert, finishedAlert } = alertMessage;
 
   const handleHistory = nextSquares => {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -33,7 +40,10 @@ export default function Game(): JSX.Element {
   };
 
   const handlePlay = (i: number) => {
-    if (currentSquares[i] || calculateWinner(currentSquares, boardSize)) {
+    if (
+      currentSquares[i] ||
+      calculateWinner(currentSquares, boardSize, setting.winCondition)
+    ) {
       return;
     }
     const nextSquares = currentSquares.slice();
@@ -61,13 +71,13 @@ export default function Game(): JSX.Element {
 
   const minusMove = (player, time) => {
     if (currentMove === 0) {
-      return alert("게임 시작 전입니다. 게임 시작 후 무르기를 해주세요.");
+      return alert(beforeStartAlert);
     }
     if (time === 0) {
-      return alert("무르기 횟수를 모두 사용하셨습니다.");
+      return alert(runOutAlert);
     }
     if (winner) {
-      return alert("이미 게임이 끝나서 무르기를 할 수 없습니다.");
+      return alert(finishedAlert);
     }
     setCurrentMove(prev => prev - 1);
     setRemainingTime(prevState => ({

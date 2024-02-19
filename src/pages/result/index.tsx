@@ -1,9 +1,11 @@
-import { useState } from "react";
+// css, 컴포넌트, 상수, 타입
+import { S } from "./style";
 import Board from "./board/index";
 import Button from "../../components/common/button";
 import Toggle from "../../components/common/toggle";
-import { S } from "./style";
 import { TBooleanObj } from "../../types/type";
+//
+import { useState } from "react";
 
 export default function Result(): JSX.Element {
   const [toggle, setToggle] = useState<TBooleanObj>({});

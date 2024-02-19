@@ -26,5 +26,6 @@ export const S = {
     $color?: string;
   }>`
     color: ${props => (props.$color ? props.$color : "#fff")};
+    font-weight: 700;
   `,
 };

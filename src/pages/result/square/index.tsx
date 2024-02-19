@@ -1,11 +1,13 @@
-import { TStringObj } from "../../../types/type";
 import { S } from "./style";
+import { colorChip } from "../../../modules/constants";
+import { TSelectValue } from "../../../types/type";
 
 type squareProps = {
   value: string;
-  setting: TStringObj;
+  setting: TSelectValue;
   moveNum: number;
 };
+
 export default function Square({
   value,
   setting,
@@ -13,9 +15,9 @@ export default function Square({
 }: squareProps): JSX.Element {
   let color;
   if (value === setting.player1Pattern) {
-    color = setting.player1Color;
+    color = colorChip[setting.player1Color];
   } else if (value === setting.player2Pattern) {
-    color = setting.player2Color;
+    color = colorChip[setting.player2Color];
   }
 
   return (
