@@ -6,7 +6,7 @@ import Button from "../../components/common/button";
 import { playerOrderAtom, settingAtom } from "../../store/atom";
 import Player from "./player";
 import { useState } from "react";
-import { calculateWinner, currentTime } from "../../modules/fuction";
+import { calculateWinner, currentTime } from "../../modules/function";
 
 export default function Game(): JSX.Element {
   const setting = useAtomValue(settingAtom);

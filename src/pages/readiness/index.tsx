@@ -4,7 +4,6 @@ import Button from "../../components/common/button";
 import useInputValue from "../../hooks/useInputValue";
 import { useSetAtom } from "jotai";
 import { playerOrderAtom, settingAtom } from "../../store/atom";
-import { useNavigate } from "react-router";
 import Select from "../../components/common/select";
 import {
   boardSizeOption,
@@ -13,7 +12,7 @@ import {
   shapeOption,
   startPlayerOption,
 } from "../../modules/constants";
-import { chooseRandomPlayer } from "../../modules/fuction";
+import { chooseRandomPlayer } from "../../modules/function";
 
 export default function Readiness(): JSX.Element {
   const { inputValue, handleInput } = useInputValue(initValue);
