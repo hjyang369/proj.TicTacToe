@@ -18,6 +18,7 @@ export default function Player({
   minusMove,
 }: playerProps): JSX.Element {
   const setting = useAtomValue(settingAtom);
+
   const plateOption = [
     { text: "마크 모양 : ", id: 1, mark: setting[`${playerName}Pattern`] },
     { text: "마크 색깔 : ", id: 2, mark: setting[`${playerName}Color`] },

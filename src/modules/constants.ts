@@ -1,4 +1,6 @@
-export const options = {
+import { TOptions, TSelectValue, TStringObj } from "../types/type";
+
+export const options: TOptions = {
   winConditionOption: [3, 4, 5, 6, 7, 8, 9],
   boardSizeOption: [
     "3 X 3",
@@ -24,18 +26,18 @@ export const options = {
   startPlayerOption: ["random", "player1", "player2"],
 };
 
-export const colorChip = {
+export const colorChip: TStringObj = {
   빨강색: "#D32117",
   주황색: "#FF6A14",
   노랑색: "#FFBC1A",
   초록색: "#008000",
   파랑색: "#0000ff",
-  남색: "#072956",
+  남색: "#004095",
   보라색: "#800080",
   핑크색: "#E71682",
 };
 
-export const initValue = {
+export const initValue: TSelectValue = {
   boardSize: "3 X 3",
   winCondition: 3,
   player1Color: "파랑색",
@@ -45,12 +47,12 @@ export const initValue = {
   startPlayer: "random",
 };
 
-export const whoIsStartPlayer = {
+export const whoIsStartPlayer: TStringObj = {
   first: "",
   second: "",
 };
 
-export const alertMessage = {
+export const alertMessage: TStringObj = {
   colorAlert:
     "플레이어 1과 플레이어 2의 색상은 서로 다른 색을 선택해야 합니다. 다시 선택해주세요.",
   shapeAlert:

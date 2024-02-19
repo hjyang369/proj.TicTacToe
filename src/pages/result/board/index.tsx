@@ -1,12 +1,10 @@
-// css, 컴포넌트, 상수, 타입
 import { S } from "./style";
 import Square from "../square/index";
-//
 import { TSelectValue } from "../../../types/type";
 
 type boardProps = {
   squares: Array<string>;
-  boardSize?: number;
+  boardSize: number;
   setting: TSelectValue;
   moveNum: Array<number>;
 };

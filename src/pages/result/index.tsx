@@ -3,13 +3,15 @@ import { S } from "./style";
 import Board from "./board/index";
 import Button from "../../components/common/button";
 import Toggle from "../../components/common/toggle";
-import { TBooleanObj } from "../../types/type";
+import { TBooleanObj, THistory } from "../../types/type";
 //
 import { useState } from "react";
 
 export default function Result(): JSX.Element {
   const [toggle, setToggle] = useState<TBooleanObj>({});
-  const history = JSON.parse(localStorage.getItem("history")) || [];
+  const historyString = localStorage.getItem("history");
+  const history: THistory[] = historyString ? JSON.parse(historyString) : [];
+
   const handleToggle = (id: string) => {
     setToggle(prev => ({ ...prev, [id]: !prev[id] }));
   };
