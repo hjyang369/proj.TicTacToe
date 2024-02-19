@@ -7,6 +7,7 @@ export const S = {
     justify-content: center;
     align-items: center;
   `,
+
   Title: styled.h1`
     font-weight: 700;
     font-size: 40px;
