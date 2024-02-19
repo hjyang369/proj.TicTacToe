@@ -1,3 +1,4 @@
+// 유저가 설정한 조건에 대한 타입
 export type TSelectValue = {
   boardSize: string;
   winCondition: number;
@@ -9,6 +10,7 @@ export type TSelectValue = {
   [key: string]: string | number;
 };
 
+// 저장된 게임에 대한 타입
 export type THistory = {
   id: string;
   history: Array<string>;
@@ -19,6 +21,7 @@ export type THistory = {
   winner: string;
 };
 
+// 유저가 설정한 조건들의 옵션에 대한 타입
 export type TOptions = {
   winConditionOption: number[];
   boardSizeOption: string[];
@@ -27,12 +30,14 @@ export type TOptions = {
   startPlayerOption: string[];
 };
 
+// 유저가 설정한 조건들 중 게임 화면에 보여지는 조건들에 대한 타입
 export type TPlateOption = {
-  text: string;
   id: number;
+  text: string;
   mark: string;
 };
 
+// 객체 타입
 export type TStringObj = {
   [key: string]: string;
 };

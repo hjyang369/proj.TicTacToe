@@ -29,10 +29,13 @@ export default function Player({
     player2: 3,
   });
 
+  // 유저가 설정한 조건 관리하는 객체
   const plateOption: TPlateOption[] = [
     {
       text: "마크 모양 : ",
       id: 1,
+      // 유저의 이름으로 전역 상태의 값을 동적으로 가져옴
+      // string임을 명시하기 위해 .toString() 사용
       mark: setting[`${playerName}Pattern`].toString(),
     },
     {
@@ -43,17 +46,23 @@ export default function Player({
     { text: "남은 무르기 : ", id: 3, mark: `${remainingTime[playerName]}회` },
   ];
 
+  // 무르기 함수
   const minusMove = (player: string, time: number) => {
+    // 게임 시작 전이거나
     if (currentMove === 0) {
       return alert(beforeStartAlert);
     }
+    // 무르기 횟수가 없거나
     if (time === 0) {
       return alert(runOutAlert);
     }
+    // 이미 경기가 종료된 경우 alert 메세지 띄우고 early return
     if (winner) {
       return alert(finishedAlert);
     }
+    // 위 조건에 해당되지 않는 경우 현재 마크 이전의 마크로 되돌아감
     setCurrentMove(prev => prev - 1);
+    // 무르기 횟수도 줄여줌
     setRemainingTime(prevState => ({
       ...prevState,
       [player]: prevState[player] - 1,
@@ -68,6 +77,7 @@ export default function Player({
           return (
             <div key={option.id}>
               <span>{option.text}</span>
+              {/* 무르기 횟수는 style 적용 안해주기 위해 조건문 추가 */}
               {option.id === 3 ? (
                 <span>{option.mark}</span>
               ) : (

@@ -16,8 +16,9 @@ export default function Square({
   handleClick,
   width,
 }: squareProps): JSX.Element {
-  const setting = useAtomValue(settingAtom);
+  const setting = useAtomValue(settingAtom); //유저가 설정한 조건이 저장된 전역 상태
 
+  //동적으로 유저가 설정한 색깔 지정
   let color: string | undefined;
   if (value === setting.player1Pattern) {
     color = colorChip[setting.player1Color];

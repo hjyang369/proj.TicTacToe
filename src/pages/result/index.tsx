@@ -9,10 +9,13 @@ import { TBooleanObj, THistory } from "../../types/type";
 import { useState } from "react";
 
 export default function Result(): JSX.Element {
+  // 토글 관리할 상태
   const [toggle, setToggle] = useState<TBooleanObj>({});
+  // 로컬스토리지에서 저장된 게임 결과 값 가져옴
   const historyString = localStorage.getItem("history");
   const history: THistory[] = historyString ? JSON.parse(historyString) : [];
 
+  // 토글 open, close하는 함수
   const handleToggle = (id: string) => {
     setToggle(prev => ({ ...prev, [id]: !prev[id] }));
   };
